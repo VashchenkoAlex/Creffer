@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Creffer | Login</title>
+    <link rel="stylesheet" href="/../css/signup.css" type="text/css">
+    <link rel="stylesheet" href="/../css/bootstrap/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/../js/jquery/jquery.simpleselect.min.css" type="text/css">
+    <script src="/../js/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/../js/bootstrap/bootstrap.min.js"></script>
+
+    <script src="/../js/signup.js"></script>
+</head>
+<body>
+<div id="mainNav" class="main-nav top">
+    <div class="container">
+        <a href="/" class="logo">
+            <img src="/../imgs/login.jpg" alt="Creffer">
+        </a>
+        <span class="toggle-nav">
+            <span class="icn-bar"></span>
+            <span class="icn-bar"></span>
+            <span class="icn-bar"></span>
+        </span>
+        <div class="mainNavBar one-page">
+            <div class="mainNavCont">
+                <ul>
+                    <li>
+                        <a href="/#about"><span>About Us</span></a>
+                    </li>
+                    <li>
+                        <a href="/#advertisers"><span>Advertisers</span></a>
+                    </li>
+                    <li>
+                        <a href="/#publishers"><span>Publishers</span></a>
+                    </li>
+                    <li>
+                        <a href="/#developers"><span>Developers</span></a>
+                    </li>
+                    <li>
+                        <a href="/#contacts"><span>Contacts</span></a>
+                    </li>
+                    <li class="login">
+                        <a href="/login"><span>Login</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-wrapper">
+    <div class="page">
+        <div class="container">
+            <h1 class="page-title">Become a partner</h1>
+            <form class="form" method="post">
+                <h3 class="sub-title">Account details</h3>
+                <div class="inp">
+                    <input type="text" id="company" name="company" placeholder="*Company/Name" required="required">
+                </div>
+                <div class="inp">
+                    <input type="text" id="address1" name="address1" placeholder="*Address1" required="required">
+                </div>
+                <div class="inp">
+                    <input type="text" id="address2" name="address2" placeholder="Address2">
+                </div>
+                <div class="inp">
+                    <input type="text" id="city" name="city" placeholder="*City*" required="required">
+                </div>
+                <div class="inp">
+                    <div class="hidden_select_container">
+                        <select id="country" name="country" required="required" class="simpleselected" size="  2">
+                        <option value="">Please choose Country...</option>
+                        <option value="237">United States</option>
+                        <option value="16">Australia</option>
+                        <option value="15">Austria</option>
+                        <option value="23">Belgium</option>
+                        <option value="20">Bosnia and Herzegovina</option>
+                        <option value="34">Brazil</option>
+                        <option value="25">Bulgaria</option>
+                        <option value="41">Canada</option>
+                        <option value="51">China</option>
+                        <option value="58">Cyprus</option>
+                        <option value="59">Czech Republic</option>
+                        <option value="62">Denmark</option>
+                        <option value="68">Egypt</option>
+                        <option value="74">Finland</option>
+                        <option value="79">France</option>
+                        <option value="60">Germany</option>
+                        <option value="93">Greece</option>
+                        <option value="109">India</option>
+                        <option value="105">Indonesia</option>
+                        <option value="107">Israel</option>
+                        <option value="114">Italy</option>
+                        <option value="118">Japan</option>
+                        <option value="126">Korea, Republic of</option>
+                        <option value="161">Mexico</option>
+                        <option value="170">Netherlands</option>
+                        <option value="175">New Zealand</option>
+                        <option value="171">Norway</option>
+                        <option value="193">Romania</option>
+                        <option value="195">Russian Federation</option>
+                        <option value="194">Serbia</option>
+                        <option value="206">Slovakia</option>
+                        <option value="204">Slovenia</option>
+                        <option value="251">South Africa</option>
+                        <option value="71">Spain</option>
+                        <option value="201">Sweden</option>
+                        <option value="46">Switzerland</option>
+                        <option value="232">Taiwan</option>
+                        <option value="222">Thailand</option>
+                        <option value="229">Turkey</option>
+                        <option value="81">United Kingdom</option>
+                        <option value="245">Vietnam</option>
+                        <option value="5">Afghanistan</option>
+                        <option value="18">Aland Islands</option>
+                        <option value="8">Albania</option>
+                        <option value="65">Algeria</option>
+                        <option value="14">American Samoa</option>
+                        <option value="3">Andorra</option>
+                        <option value="10">Angola</option>
+                        <option value="7">Anguilla</option>
+                        <option value="12">Antarctica</option>
+                        <option value="6">Antigua and Barbuda</option>
+                        <option value="13">Argentina</option>
+                        <option value="9">Armenia</option>
+                        <option value="17">Aruba</option>
+                        <option value="11">Asia/Pacific Region</option>
+                        <option value="19">Azerbaijan</option>
+                        <option value="35">Bahamas</option>
+                        <option value="26">Bahrain</option>
+                        <option value="22">Bangladesh</option>
+                        <option value="21">Barbados</option>
+                        <option value="39">Belarus</option>
+                        <option value="40">Belize</option>
+                        <option value="28">Benin</option>
+                        <option value="30">Bermuda</option>
+                        <option value="36">Bhutan</option>
+                        <option value="32">Bolivia</option>
+                        <option value="33">Bonaire, Saint Eustatius and Saba</option>
+                        <option value="38">Botswana</option>
+                        <option value="37">Bouvet Island</option>
+                        <option value="110">British Indian Ocean Territory</option>
+                        <option value="31">Brunei Darussalam</option>
+                        <option value="24">Burkina Faso</option>
+                        <option value="27">Burundi</option>
+                        <option value="121">Cambodia</option>
+                        <option value="50">Cameroon</option>
+                        <option value="55">Cape Verde</option>
+                        <option value="128">Cayman Islands</option>
+                        <option value="44">Central African Republic</option>
+                        <option value="219">Chad</option>
+                        <option value="49">Chile</option>
+                        <option value="57">Christmas Island</option>
+                        <option value="42">Cocos (Keeling) Islands</option>
+                        <option value="52">Colombia</option>
+                        <option value="123">Comoros</option>
+                        <option value="45">Congo</option>
+                        <option value="43">Congo, The Democratic Republic of the</option>
+                        <option value="48">Cook Islands</option>
+                        <option value="53">Costa Rica</option>
+                        <option value="47">Cote d'Ivoire</option>
+                        <option value="102">Croatia</option>
+                        <option value="54">Cuba</option>
+                        <option value="56">Curacao</option>
+                        <option value="61">Djibouti</option>
+                        <option value="63">Dominica</option>
+                        <option value="64">Dominican Republic</option>
+                        <option value="66">Ecuador</option>
+                        <option value="214">El Salvador</option>
+                        <option value="92">Equatorial Guinea</option>
+                        <option value="70">Eritrea</option>
+                        <option value="67">Estonia</option>
+                        <option value="72">Ethiopia</option>
+                        <option value="76">Falkland Islands (Malvinas)</option>
+                        <option value="78">Faroe Islands</option>
+                        <option value="75">Fiji</option>
+                        <option value="84">French Guiana</option>
+                        <option value="179">French Polynesia</option>
+                        <option value="220">French Southern Territories</option>
+                        <option value="80">Gabon</option>
+                        <option value="89">Gambia</option>
+                        <option value="83">Georgia</option>
+                        <option value="86">Ghana</option>
+                        <option value="87">Gibraltar</option>
+                        <option value="88">Greenland</option>
+                        <option value="82">Grenada</option>
+                        <option value="91">Guadeloupe</option>
+                        <option value="96">Guam</option>
+                        <option value="95">Guatemala</option>
+                        <option value="85">Guernsey</option>
+                        <option value="90">Guinea</option>
+                        <option value="97">Guinea-Bissau</option>
+                        <option value="98">Guyana</option>
+                        <option value="103">Haiti</option>
+                        <option value="100">Heard Island and McDonald Islands</option>
+                        <option value="240">Holy See (Vatican City State)</option>
+                        <option value="101">Honduras</option>
+                        <option value="99">Hong Kong</option>
+                        <option value="104">Hungary</option>
+                        <option value="113">Iceland</option>
+                        <option value="112">Iran, Islamic Republic of</option>
+                        <option value="111">Iraq</option>
+                        <option value="106">Ireland</option>
+                        <option value="108">Isle of Man</option>
+                        <option value="116">Jamaica</option>
+                        <option value="115">Jersey</option>
+                        <option value="117">Jordan</option>
+                        <option value="129">Kazakhstan</option>
+                        <option value="119">Kenya</option>
+                        <option value="122">Kiribati</option>
+                        <option value="125">Korea, Democratic People's Republic of</option>
+                        <option value="255">Kosovo</option>
+                        <option value="127">Kuwait</option>
+                        <option value="120">Kyrgyzstan</option>
+                        <option value="130">Lao People's Democratic Republic</option>
+                        <option value="139">Latvia</option>
+                        <option value="131">Lebanon</option>
+                        <option value="136">Lesotho</option>
+                        <option value="135">Liberia</option>
+                        <option value="140">Libyan Arab Jamahiriya</option>
+                        <option value="133">Liechtenstein</option>
+                        <option value="137">Lithuania</option>
+                        <option value="138">Luxembourg</option>
+                        <option value="152">Macao</option>
+                        <option value="148">Macedonia</option>
+                        <option value="146">Madagascar</option>
+                        <option value="160">Malawi</option>
+                        <option value="162">Malaysia</option>
+                        <option value="159">Maldives</option>
+                        <option value="149">Mali</option>
+                        <option value="157">Malta</option>
+                        <option value="147">Marshall Islands</option>
+                        <option value="154">Martinique</option>
+                        <option value="155">Mauritania</option>
+                        <option value="158">Mauritius</option>
+                        <option value="250">Mayotte</option>
+                        <option value="77">Micronesia, Federated States of</option>
+                        <option value="143">Moldova, Republic of</option>
+                        <option value="142">Monaco</option>
+                        <option value="151">Mongolia</option>
+                        <option value="144">Montenegro</option>
+                        <option value="156">Montserrat</option>
+                        <option value="141">Morocco</option>
+                        <option value="163">Mozambique</option>
+                        <option value="150">Myanmar</option>
+                        <option value="164">Namibia</option>
+                        <option value="173">Nauru</option>
+                        <option value="172">Nepal</option>
+                        <option value="254">Netherlands Antilles</option>
+                        <option value="165">New Caledonia</option>
+                        <option value="169">Nicaragua</option>
+                        <option value="166">Niger</option>
+                        <option value="168">Nigeria</option>
+                        <option value="174">Niue</option>
+                        <option value="167">Norfolk Island</option>
+                        <option value="153">Northern Mariana Islands</option>
+                        <option value="176">Oman</option>
+                        <option value="182">Pakistan</option>
+                        <option value="189">Palau</option>
+                        <option value="187">Palestinian Territory</option>
+                        <option value="177">Panama</option>
+                        <option value="180">Papua New Guinea</option>
+                        <option value="190">Paraguay</option>
+                        <option value="178">Peru</option>
+                        <option value="181">Philippines</option>
+                        <option value="185">Pitcairn</option>
+                        <option value="183">Poland</option>
+                        <option value="188">Portugal</option>
+                        <option value="186">Puerto Rico</option>
+                        <option value="191">Qatar</option>
+                        <option value="192">Reunion</option>
+                        <option value="196">Rwanda</option>
+                        <option value="29">Saint Bartelemey</option>
+                        <option value="203">Saint Helena</option>
+                        <option value="124">Saint Kitts and Nevis</option>
+                        <option value="132">Saint Lucia</option>
+                        <option value="145">Saint Martin</option>
+                        <option value="184">Saint Pierre and Miquelon</option>
+                        <option value="241">Saint Vincent and the Grenadines</option>
+                        <option value="248">Samoa</option>
+                        <option value="208">San Marino</option>
+                        <option value="213">Sao Tome and Principe</option>
+                        <option value="197">Saudi Arabia</option>
+                        <option value="209">Senegal</option>
+                        <option value="199">Seychelles</option>
+                        <option value="207">Sierra Leone</option>
+                        <option value="202">Singapore</option>
+                        <option value="215">Sint Maarten</option>
+                        <option value="198">Solomon Islands</option>
+                        <option value="210">Somalia</option>
+                        <option value="94">South Georgia and the South Sandwich Islands</option>
+                        <option value="212">South Sudan</option>
+                        <option value="134">Sri Lanka</option>
+                        <option value="200">Sudan</option>
+                        <option value="211">Suriname</option>
+                        <option value="205">Svalbard and Jan Mayen</option>
+                        <option value="217">Swaziland</option>
+                        <option value="216">Syrian Arab Republic</option>
+                        <option value="223">Tajikistan</option>
+                        <option value="233">Tanzania, United Republic of</option>
+                        <option value="225">Timor-Leste</option>
+                        <option value="221">Togo</option>
+                        <option value="224">Tokelau</option>
+                        <option value="228">Tonga</option>
+                        <option value="230">Trinidad and Tobago</option>
+                        <option value="227">Tunisia</option>
+                        <option value="226">Turkmenistan</option>
+                        <option value="218">Turks and Caicos Islands</option>
+                        <option value="231">Tuvalu</option>
+                        <option value="235">Uganda</option>
+                        <option value="234">Ukraine</option>
+                        <option value="4">United Arab Emirates</option>
+                        <option value="236">United States Minor Outlying Islands</option>
+                        <option value="238">Uruguay</option>
+                        <option value="239">Uzbekistan</option>
+                        <option value="246">Vanuatu</option>
+                        <option value="242">Venezuela</option>
+                        <option value="243">Virgin Islands, British</option>
+                        <option value="244">Virgin Islands, U.S.</option>
+                        <option value="247">Wallis and Futuna</option>
+                        <option value="69">Western Sahara</option>
+                        <option value="249">Yemen</option>
+                        <option value="252">Zambia</option>
+                        <option value="253">Zimbabwe</option>
+                        <option value="73">Europe</option>
+                    </select>
+                    </div>
+                    <div class="simpleselect" id="simpleselect_country">
+                        <div class="placeholder">Please choose Country...</div>
+                        <div class="options" style="height: auto; overflow-y: scroll; opacity: 1; display: none; top: 0px;">
+                            <div class="option">Please choose Country...</div>
+                            <div class="option">United States</div>
+                            <div class="option">Australia</div>
+                            <div class="option">Austria</div>
+                            <div class="option">Belgium</div>
+                            <div class="option">Bosnia and Herzegovina</div>
+                            <div class="option">Brazil</div>
+                            <div class="option">Bulgaria</div>
+                            <div class="option">Canada</div>
+                            <div class="option">China</div>
+                            <div class="option">Cyprus</div>
+                            <div class="option">Czech Republic</div>
+                            <div class="option">Denmark</div>
+                            <div class="option">Egypt</div>
+                            <div class="option">Finland</div>
+                            <div class="option">France</div>
+                            <div class="option">Germany</div>
+                            <div class="option">Greece</div>
+                            <div class="option">India</div>
+                            <div class="option">Indonesia</div>
+                            <div class="option">Israel</div>
+                            <div class="option">Italy</div>
+                            <div class="option">Japan</div>
+                            <div class="option">Korea, Republic of</div>
+                            <div class="option">Mexico</div>
+                            <div class="option">Netherlands</div>
+                            <div class="option">New Zealand</div>
+                            <div class="option">Norway</div>
+                            <div class="option">Romania</div>
+                            <div class="option">Russian Federation</div>
+                            <div class="option">Serbia</div>
+                            <div class="option">Slovakia</div>
+                            <div class="option">Slovenia</div>
+                            <div class="option">South Africa</div>
+                            <div class="option">Spain</div>
+                            <div class="option">Sweden</div>
+                            <div class="option">Switzerland</div>
+                            <div class="option">Taiwan</div>
+                            <div class="option">Thailand</div>
+                            <div class="option">Turkey</div>
+                            <div class="option">United Kingdom</div>
+                            <div class="option">Vietnam</div>
+                            <div class="option">Afghanistan</div>
+                            <div class="option">Aland Islands</div>
+                            <div class="option">Albania</div>
+                            <div class="option">Algeria</div>
+                            <div class="option">American Samoa</div>
+                            <div class="option">Andorra</div>
+                            <div class="option">Angola</div>
+                            <div class="option">Anguilla</div>
+                            <div class="option">Antarctica</div>
+                            <div class="option">Antigua and Barbuda</div>
+                            <div class="option">Argentina</div>
+                            <div class="option">Armenia</div>
+                            <div class="option">Aruba</div>
+                            <div class="option">Asia/Pacific Region</div>
+                            <div class="option">Azerbaijan</div>
+                            <div class="option">Bahamas</div>
+                            <div class="option">Bahrain</div>
+                            <div class="option">Bangladesh</div>
+                            <div class="option">Barbados</div>
+                            <div class="option">Belarus</div>
+                            <div class="option">Belize</div>
+                            <div class="option">Benin</div>
+                            <div class="option">Bermuda</div>
+                            <div class="option">Bhutan</div>
+                            <div class="option">Bolivia</div>
+                            <div class="option">Bonaire, Saint Eustatius and Saba</div>
+                            <div class="option">Botswana</div>
+                            <div class="option">Bouvet Island</div>
+                            <div class="option">British Indian Ocean Territory</div>
+                            <div class="option">Brunei Darussalam</div>
+                            <div class="option">Burkina Faso</div>
+                            <div class="option">Burundi</div>
+                            <div class="option">Cambodia</div>
+                            <div class="option">Cameroon</div>
+                            <div class="option">Cape Verde</div>
+                            <div class="option">Cayman Islands</div>
+                            <div class="option">Central African Republic</div>
+                            <div class="option">Chad</div>
+                            <div class="option">Chile</div>
+                            <div class="option">Christmas Island</div>
+                            <div class="option">Cocos (Keeling) Islands</div>
+                            <div class="option">Colombia</div>
+                            <div class="option">Comoros</div>
+                            <div class="option">Congo</div>
+                            <div class="option">Congo, The Democratic Republic of the</div>
+                            <div class="option">Cook Islands</div>
+                            <div class="option">Costa Rica</div>
+                            <div class="option">Cote d'Ivoire</div>
+                            <div class="option">Croatia</div>
+                            <div class="option">Cuba</div>
+                            <div class="option">Curacao</div>
+                            <div class="option">Djibouti</div>
+                            <div class="option">Dominica</div>
+                            <div class="option">Dominican Republic</div>
+                            <div class="option">Ecuador</div>
+                            <div class="option">El Salvador</div>
+                            <div class="option">Equatorial Guinea</div>
+                            <div class="option">Eritrea</div>
+                            <div class="option">Estonia</div>
+                            <div class="option">Ethiopia</div>
+                            <div class="option">Falkland Islands (Malvinas)</div>
+                            <div class="option">Faroe Islands</div>
+                            <div class="option">Fiji</div>
+                            <div class="option">French Guiana</div>
+                            <div class="option">French Polynesia</div>
+                            <div class="option">French Southern Territories</div>
+                            <div class="option">Gabon</div>
+                            <div class="option">Gambia</div>
+                            <div class="option">Georgia</div>
+                            <div class="option">Ghana</div>
+                            <div class="option">Gibraltar</div>
+                            <div class="option">Greenland</div>
+                            <div class="option">Grenada</div>
+                            <div class="option">Guadeloupe</div>
+                            <div class="option">Guam</div>
+                            <div class="option">Guatemala</div>
+                            <div class="option">Guernsey</div>
+                            <div class="option">Guinea</div>
+                            <div class="option">Guinea-Bissau</div>
+                            <div class="option">Guyana</div>
+                            <div class="option">Haiti</div>
+                            <div class="option">Heard Island and McDonald Islands</div>
+                            <div class="option">Holy See (Vatican City State)</div>
+                            <div class="option">Honduras</div>
+                            <div class="option">Hong Kong</div>
+                            <div class="option">Hungary</div>
+                            <div class="option">Iceland</div>
+                            <div class="option">Iran, Islamic Republic of</div>
+                            <div class="option">Iraq</div>
+                            <div class="option">Ireland</div>
+                            <div class="option">Isle of Man</div>
+                            <div class="option">Jamaica</div>
+                            <div class="option">Jersey</div>
+                            <div class="option">Jordan</div>
+                            <div class="option">Kazakhstan</div>
+                            <div class="option">Kenya</div>
+                            <div class="option">Kiribati</div>
+                            <div class="option">Korea, Democratic People's Republic of</div>
+                            <div class="option">Kosovo</div>
+                            <div class="option">Kuwait</div>
+                            <div class="option">Kyrgyzstan</div>
+                            <div class="option">Lao People's Democratic Republic</div>
+                            <div class="option">Latvia</div>
+                            <div class="option">Lebanon</div>
+                            <div class="option">Lesotho</div>
+                            <div class="option">Liberia</div>
+                            <div class="option">Libyan Arab Jamahiriya</div>
+                            <div class="option">Liechtenstein</div>
+                            <div class="option">Lithuania</div>
+                            <div class="option">Luxembourg</div>
+                            <div class="option">Macao</div>
+                            <div class="option">Macedonia</div>
+                            <div class="option">Madagascar</div>
+                            <div class="option">Malawi</div>
+                            <div class="option">Malaysia</div>
+                            <div class="option">Maldives</div>
+                            <div class="option">Mali</div>
+                            <div class="option">Malta</div>
+                            <div class="option">Marshall Islands</div>
+                            <div class="option">Martinique</div>
+                            <div class="option">Mauritania</div>
+                            <div class="option">Mauritius</div>
+                            <div class="option">Mayotte</div>
+                            <div class="option">Micronesia, Federated States of</div>
+                            <div class="option">Moldova, Republic of</div>
+                            <div class="option">Monaco</div>
+                            <div class="option">Mongolia</div>
+                            <div class="option">Montenegro</div>
+                            <div class="option">Montserrat</div>
+                            <div class="option">Morocco</div>
+                            <div class="option">Mozambique</div>
+                            <div class="option">Myanmar</div>
+                            <div class="option">Namibia</div>
+                            <div class="option">Nauru</div>
+                            <div class="option">Nepal</div>
+                            <div class="option">Netherlands Antilles</div>
+                            <div class="option">New Caledonia</div>
+                            <div class="option">Nicaragua</div>
+                            <div class="option">Niger</div>
+                            <div class="option">Nigeria</div>
+                            <div class="option">Niue</div>
+                            <div class="option">Norfolk Island</div>
+                            <div class="option">Northern Mariana Islands</div>
+                            <div class="option">Oman</div>
+                            <div class="option">Pakistan</div>
+                            <div class="option">Palau</div>
+                            <div class="option">Palestinian Territory</div>
+                            <div class="option">Panama</div>
+                            <div class="option">Papua New Guinea</div>
+                            <div class="option">Paraguay</div>
+                            <div class="option">Peru</div>
+                            <div class="option">Philippines</div>
+                            <div class="option">Pitcairn</div>
+                            <div class="option">Poland</div>
+                            <div class="option">Portugal</div>
+                            <div class="option">Puerto Rico</div>
+                            <div class="option">Qatar</div>
+                            <div class="option">Reunion</div>
+                            <div class="option">Rwanda</div>
+                            <div class="option">Saint Bartelemey</div>
+                            <div class="option">Saint Helena</div>
+                            <div class="option">Saint Kitts and Nevis</div>
+                            <div class="option">Saint Lucia</div>
+                            <div class="option">Saint Martin</div>
+                            <div class="option">Saint Pierre and Miquelon</div>
+                            <div class="option">Saint Vincent and the Grenadines</div>
+                            <div class="option">Samoa</div>
+                            <div class="option">San Marino</div>
+                            <div class="option">Sao Tome and Principe</div>
+                            <div class="option">Saudi Arabia</div>
+                            <div class="option">Senegal</div>
+                            <div class="option">Seychelles</div>
+                            <div class="option">Sierra Leone</div>
+                            <div class="option">Singapore</div>
+                            <div class="option">Sint Maarten</div>
+                            <div class="option">Solomon Islands</div>
+                            <div class="option">Somalia</div>
+                            <div class="option">South Georgia and the South Sandwich Islands</div>
+                            <div class="option">South Sudan</div>
+                            <div class="option">Sri Lanka</div>
+                            <div class="option">Sudan</div>
+                            <div class="option">Suriname</div>
+                            <div class="option">Svalbard and Jan Mayen</div>
+                            <div class="option">Swaziland</div>
+                            <div class="option">Syrian Arab Republic</div>
+                            <div class="option">Tajikistan</div>
+                            <div class="option">Tanzania, United Republic of</div>
+                            <div class="option">Timor-Leste</div>
+                            <div class="option">Togo</div>
+                            <div class="option">Tokelau</div>
+                            <div class="option">Tonga</div>
+                            <div class="option">Trinidad and Tobago</div>
+                            <div class="option">Tunisia</div>
+                            <div class="option">Turkmenistan</div>
+                            <div class="option">Turks and Caicos Islands</div>
+                            <div class="option">Tuvalu</div>
+                            <div class="option">Uganda</div>
+                            <div class="option">Ukraine</div>
+                            <div class="option">United Arab Emirates</div>
+                            <div class="option">United States Minor Outlying Islands</div>
+                            <div class="option">Uruguay</div>
+                            <div class="option">Uzbekistan</div>
+                            <div class="option">Vanuatu</div>
+                            <div class="option">Venezuela</div>
+                            <div class="option">Virgin Islands, British</div>
+                            <div class="option">Virgin Islands, U.S.</div>
+                            <div class="option">Wallis and Futuna</div>
+                            <div class="option">Western Sahara</div>
+                            <div class="option">Yemen</div>
+                            <div class="option">Zambia</div>
+                            <div class="option">Zimbabwe</div>
+                            <div class="option">Europe</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inp">
+                    <input type="text" id="region" name="region" placeholder="Region/State">
+                </div>
+                <div class="inp">
+                    <input type="text" id="zip" name="zip" placeholder="*Zip*" required="required">
+                </div>
+                <div class="inp">
+                    <input type="text" id="phone" name="phone" placeholder="*Phone*" required="required">
+                </div>
+                <br>
+
+                <h3 class="sub-title">User details</h3>
+                <div class="inp">
+                    <input type="email" id="email" name="email" placeholder="*Email*" required="required">
+                </div>
+                <div class="inp">
+                    <input type="text" id="first_name" name="first_name" placeholder="*First name*" required="required">
+                </div>
+                <div class="inp">
+                    <input type="text" id="last_name" name="last_name" placeholder="*Last name*" required="required">
+                </div>
+                <div class="inp">
+                    <input type="password" id="password" name="password" placeholder="*Password*" required="required">
+                </div>
+                <div class="inp">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="*Confirm password*" required="required">
+                </div>
+                <br>
+
+                <h3 class="sub-title">Additional questions</h3>
+                <div class="inp">
+                    <input type="text" id="skype" name="skype" placeholder="*What’s your Skype username?*" required="required">
+                </div>
+                <div class="inp">
+                    <textarea id="traffic" name="traffic" placeholder="*Please state your sources of traffic*" required="required" rows="2"></textarea>
+                </div>
+                <div class="inp">
+                    <textarea id="type_traffic" name="type_traffic" placeholder="*Is your traffic incentivised/non-incentivised? Both?*" required="required" rows="3"></textarea>
+                </div>
+                <div class="inp">
+                    <textarea id="company_url" name="company_url" placeholder="*What’s your company website URL?*" required="required" rows="2"></textarea>
+                </div>
+                <div class="inp">
+                    <textarea id="info" name="info" placeholder="*Please provide us with more information about apps you would like to promote (preveiw URLs, payouts, GEOs):*" required="required" rows="4"></textarea>
+                </div>
+
+                <div class="inp">
+                    <input type="checkbox" id="agree" name="agree_terms">                <label for="agree">I Accept <a href="https://appave.mobi/terms" target="_blank"> Terms &amp; Conditions</a> and <a href="https://appave.mobi/privacy" target="_blank">Privacy Policy</a></label>
+                </div>
+
+                <button type="submit" class="btn btn-form">
+                    <span class="btn-mask"></span>
+                    <span class="btn-label">Sign up</span>
+                </button>
+
+                <div class="links">
+                    <p>Already have account?</p>
+                    <a class="link" href="/login">Sign in</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
