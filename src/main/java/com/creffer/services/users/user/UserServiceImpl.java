@@ -24,11 +24,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserModel user) {
+    public void savePublisher(UserModel user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
-        RoleModel adminRole = roleRepo.findByRole("ADMIN");
-        user.setRoles(new HashSet<>(Arrays.asList(adminRole)));
+        RoleModel pubRole = roleRepo.findByRole("PUBLISHER");
+        user.setRoles(new HashSet<>(Arrays.asList(pubRole)));
         userRepo.save(user);
+    }
+
+    @Override
+    public void saveManager(UserModel user) {
+        //TO DO
+    }
+
+    @Override
+    public void saveAdmin(UserModel user) {
+        //TO DO
+    }
+
+    @Override
+    public void saveAdvertiser(UserModel user) {
+        //TO DO
     }
 }

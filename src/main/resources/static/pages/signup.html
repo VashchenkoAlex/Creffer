@@ -67,7 +67,7 @@
                 <div class="inp">
                     <input type="text" id="city" name="city" placeholder="*City*" required="required">
                 </div>
-                <div class="inp">
+                <!--<div class="inp">
                     <div class="hidden_select_container">
                         <select id="country" name="country" required="required" class="simpleselected" size="  2">
                         <option value="">Please choose Country...</option>
@@ -585,6 +585,9 @@
                             <div class="option">Europe</div>
                         </div>
                     </div>
+                </div>-->
+                <div class="inp">
+                    <input type="text" id="country" name="country" placeholder="Country">
                 </div>
                 <div class="inp">
                     <input type="text" id="region" name="region" placeholder="Region/State">
@@ -602,10 +605,10 @@
                     <input type="email" id="email" name="email" placeholder="*Email*" required="required">
                 </div>
                 <div class="inp">
-                    <input type="text" id="first_name" name="first_name" placeholder="*First name*" required="required">
+                    <input type="text" id="firstName" name="firstName" placeholder="*First name*" required="required">
                 </div>
                 <div class="inp">
-                    <input type="text" id="last_name" name="last_name" placeholder="*Last name*" required="required">
+                    <input type="text" id="lastName" name="lastName" placeholder="*Last name*" required="required">
                 </div>
                 <div class="inp">
                     <input type="password" id="password" name="password" placeholder="*Password*" required="required">
@@ -623,20 +626,21 @@
                     <textarea id="traffic" name="traffic" placeholder="*Please state your sources of traffic*" required="required" rows="2"></textarea>
                 </div>
                 <div class="inp">
-                    <textarea id="type_traffic" name="type_traffic" placeholder="*Is your traffic incentivised/non-incentivised? Both?*" required="required" rows="3"></textarea>
+                    <textarea id="typeTraffic" name="typeTraffic" placeholder="*Is your traffic incentivised/non-incentivised? Both?*" required="required" rows="3"></textarea>
                 </div>
                 <div class="inp">
-                    <textarea id="company_url" name="company_url" placeholder="*What’s your company website URL?*" required="required" rows="2"></textarea>
+                    <textarea id="companyUrl" name="companyUrl" placeholder="*What’s your company website URL?*" required="required" rows="2"></textarea>
                 </div>
                 <div class="inp">
                     <textarea id="info" name="info" placeholder="*Please provide us with more information about apps you would like to promote (preveiw URLs, payouts, GEOs):*" required="required" rows="4"></textarea>
                 </div>
 
                 <div class="inp">
-                    <input type="checkbox" id="agree" name="agree_terms">                <label for="agree">I Accept <a href="https://appave.mobi/terms" target="_blank"> Terms &amp; Conditions</a> and <a href="https://appave.mobi/privacy" target="_blank">Privacy Policy</a></label>
+                    <input type="checkbox" id="agree" name="agree_terms">
+                    <label for="agree">I Accept <a href="https://appave.mobi/terms" target="_blank"> Terms &amp; Conditions</a> and <a href="https://appave.mobi/privacy" target="_blank">Privacy Policy</a></label>
                 </div>
 
-                <button type="submit" class="btn btn-form">
+                <button type="submit" class="btn btn-form" id="signUpComplete">
                     <span class="btn-mask"></span>
                     <span class="btn-label">Sign up</span>
                 </button>
@@ -649,5 +653,11 @@
         </div>
     </div>
 </div>
+<!--Check JQuery is working-->
+<!--<script type="text/javascript">
+    $(document).ready(function(){
+        alert(jQuery.fn.jquery);
+    });
+</script>-->
 </body>
 </html>

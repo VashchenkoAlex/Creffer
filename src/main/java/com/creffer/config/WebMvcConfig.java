@@ -21,6 +21,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfi
     @Autowired
     @Qualifier("jstlViewResolver")
     private ViewResolver jstlViewResolver;
+    public WebMvcConfig(){
+        super();
+    }
     @Bean
     @DependsOn({ "jstlViewResolver" })
     public ViewResolver viewResolver() {
@@ -47,6 +50,18 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfi
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
                 .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        super.addViewControllers(registry);
+        registry.addViewController("/login.html");
+        registry.addViewController("/home.html");
+        registry.addViewController("/signup.html");
+        registry.addViewController("/publisher/dashboard.html");
+        registry.addViewController("/admin/dashboard.html");
+        registry.addViewController("/advertiser/dashboard.html");
+        registry.addViewController("/manager/dashboard.html");
     }
 
 }

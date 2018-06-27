@@ -4,5 +4,8 @@ import com.creffer.models.users.UserModel;
 
 public interface UserService {
     UserModel findUserByEmail(String email);
-    void saveUser(UserModel user);
+    void savePublisher(UserModel user);
+    void saveManager(UserModel user);
+    void saveAdmin(UserModel user);
+    void saveAdvertiser(UserModel user);
 }

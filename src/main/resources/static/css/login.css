@@ -4,6 +4,7 @@
 }
 #errorData p
 {
+    display: none;
     font-size: 20px;
     color: #FF1C19;
 }

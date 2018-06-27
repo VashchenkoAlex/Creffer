@@ -1,19 +1,18 @@
 package com.creffer.config;
 
+import com.creffer.security.CustomLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.*;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
@@ -23,6 +22,7 @@ import javax.sql.DataSource;
 @ComponentScan("com.creffer")
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@Profile("!https")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -32,12 +32,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     private String rolesQuery;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(final HttpSecurity http) throws Exception{
         http
+            .csrf().disable()
                 .authorizeRequests()
-                    //.antMatchers("/resources/**").permitAll()
-                    //.antMatchers("/**").permitAll()
-                    //.antMatchers("/pages/").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/manager/**").hasRole("MANAGER")
+                .antMatchers("/publisher/**").hasRole("PUBLISHER")
+                .antMatchers("/advertiser/**").hasRole("ADVERTISER")
+                .antMatchers("/anonymous/**").anonymous()
+                .antMatchers("/login").permitAll()
+
                     .antMatchers("/imgs/**").permitAll()
                     .antMatchers("/css/**").permitAll()
                     .antMatchers("/js/**").permitAll()
@@ -47,20 +52,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                     .antMatchers("/login").permitAll()
                     .antMatchers("/track").permitAll()
                     .antMatchers("/doGame").permitAll()
-                    .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-                    .authenticated().and().csrf().disable().formLogin()
-                    .loginPage("/login").failureUrl("/login?error=true")
-                    .defaultSuccessUrl("/admin/home")
-                    .usernameParameter("email")
-                    .passwordParameter("password")
+
+                    .anyRequest().authenticated().and().formLogin()
+                    .loginPage("/login.html")
+                    .loginProcessingUrl("/perform_login")
+                    .defaultSuccessUrl("/publisher/dashboard.html")//TO DO
+                    .failureUrl("/login?error=true")
                     .and().logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/").and().exceptionHandling()
-                    .accessDeniedPage("/access-denied");
+                    .logoutUrl("/main.html")
+                    .deleteCookies("JSESSIONID")
+                    .logoutSuccessHandler(logoutSuccessHandler());
+    }
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler(){
+        return new CustomLogoutSuccessHandler();
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .jdbcAuthentication()
                 .usersByUsernameQuery(usersQuery)
@@ -69,12 +78,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .passwordEncoder(bCryptPasswordEncoder);
     }
 
-    /*@Override
-    public void configure(WebSecurity web){
-        web
-                .ignoring()
-                .antMatchers("/resources/**","/static/**","/css/**","/imgs/**","/videos/**");
-    }*/
     @ConfigurationProperties(prefix = "datasource.primary")
     @Bean
     @Primary
