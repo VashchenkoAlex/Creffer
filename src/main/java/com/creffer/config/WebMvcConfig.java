@@ -1,19 +1,20 @@
 package com.creffer.config;
 
+import com.creffer.config.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 @Configuration
 @EnableWebMvc
+//@ComponentScan() - ?
 public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfigurer{
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
             "classpath:/META-INF/resources/", "classpath:/resources/",
@@ -41,6 +42,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfi
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer){
         configurer.enable();
@@ -55,13 +58,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfi
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         super.addViewControllers(registry);
-        registry.addViewController("/login.html");
-        registry.addViewController("/home.html");
-        registry.addViewController("/signup.html");
-        registry.addViewController("/publisher/dashboard.html");
-        registry.addViewController("/admin/dashboard.html");
-        registry.addViewController("/advertiser/dashboard.html");
-        registry.addViewController("/manager/dashboard.html");
+        registry.addViewController("/login.html").setViewName("/login");
+        registry.addViewController("/home.html").setViewName("/home");
+        registry.addViewController("/signup.html").setViewName("/signup");
+        registry.addViewController("/publisher/dashboard.html").setViewName("/publisherDashboard");
+        registry.addViewController("/admin/dashboard.html").setViewName("/adminDashboard");
+        registry.addViewController("/advertiser/dashboard.html").setViewName("/advertiserDashboard");
+        registry.addViewController("/manager/dashboard.html").setViewName("/managerDashboard");
     }
 
 }

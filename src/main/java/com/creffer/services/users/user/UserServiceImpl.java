@@ -1,5 +1,7 @@
 package com.creffer.services.users.user;
 
+import com.creffer.models.LoginModel;
+import com.creffer.models.SuccessModel;
 import com.creffer.models.users.UserModel;
 import com.creffer.models.users.RoleModel;
 import com.creffer.repository.users.UserRepo;
@@ -8,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
+
 @Service("userServise")
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -28,7 +33,9 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         RoleModel pubRole = roleRepo.findByRole("PUBLISHER");
-        user.setRoles(new HashSet<>(Arrays.asList(pubRole)));
+        ArrayList<RoleModel> roles = new ArrayList<>();
+        roles.add(pubRole);
+        user.setRoles(roles);
         userRepo.save(user);
     }
 
@@ -45,5 +52,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveAdvertiser(UserModel user) {
         //TO DO
+    }
+
+    @Override
+    public SuccessModel validateUser(LoginModel loginModel) {
+        UserModel user = userRepo.findByEmail(loginModel.getEmail());
+        SuccessModel success = new SuccessModel();
+        success.setEmail(user.getEmail());
+        success.setRole(user.getRoles().get(0).getRole());
+        success.setStatus(user.getActive());
+        boolean checkPass = bCryptPasswordEncoder.matches(loginModel.getPassword(),user.getPassword());
+        success.setCorrectPassword(checkPass);
+        return success;
     }
 }

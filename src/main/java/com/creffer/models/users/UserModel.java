@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -93,16 +95,13 @@ public class UserModel implements Serializable {
     private String notes;
 
     @Column(name = "password")
-    /*@Length(min = 6, message = "Your password must have at least 6 characters")
-    @NotEmpty(message = "*Please provide your password*")*/
-    //@Transient
     @JsonView(EXPORT.class)
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<RoleModel> roles;
+    private List<RoleModel> roles;
 
     //Accesses Markers
     public interface EXPORT{}
@@ -276,11 +275,11 @@ public class UserModel implements Serializable {
         this.password = password;
     }
 
-    public Set<RoleModel> getRoles() {
+    public List<RoleModel> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<RoleModel> roles) {
+    public void setRoles(List<RoleModel> roles) {
         this.roles = roles;
     }
 

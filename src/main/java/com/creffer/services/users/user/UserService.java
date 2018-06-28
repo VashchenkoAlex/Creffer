@@ -1,5 +1,7 @@
 package com.creffer.services.users.user;
 
+import com.creffer.models.LoginModel;
+import com.creffer.models.SuccessModel;
 import com.creffer.models.users.UserModel;
 
 public interface UserService {
@@ -8,4 +10,5 @@ public interface UserService {
     void saveManager(UserModel user);
     void saveAdmin(UserModel user);
     void saveAdvertiser(UserModel user);
+    SuccessModel validateUser(LoginModel loginModel);
 }
