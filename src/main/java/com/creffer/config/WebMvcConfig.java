@@ -1,12 +1,10 @@
 package com.creffer.config;
 
-import com.creffer.config.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -58,13 +56,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfi
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         super.addViewControllers(registry);
-        registry.addViewController("/login.html").setViewName("/login");
-        registry.addViewController("/home.html").setViewName("/home");
-        registry.addViewController("/signup.html").setViewName("/signup");
-        registry.addViewController("/publisher/dashboard.html").setViewName("/publisherDashboard");
-        registry.addViewController("/admin/dashboard.html").setViewName("/adminDashboard");
-        registry.addViewController("/advertiser/dashboard.html").setViewName("/advertiserDashboard");
-        registry.addViewController("/manager/dashboard.html").setViewName("/managerDashboard");
+        registry.addViewController("/pages/login.html").setViewName("/login");
+        registry.addViewController("/pages/home.html").setViewName("/home");
+        registry.addViewController("/pages/signup.html").setViewName("/signup");
+        registry.addViewController("/pages/protected/publisher/dashboard.html").setViewName("/publisherDashboard");
+        registry.addViewController("/pages/protected/admin/dashboard.html").setViewName("/adminDashboard");
+        registry.addViewController("/pages/protected/advertiser/dashboard.html").setViewName("/advertiserDashboard");
+        registry.addViewController("/pages/protected/manager/dashboard.html").setViewName("/managerDashboard");
     }
 
 }

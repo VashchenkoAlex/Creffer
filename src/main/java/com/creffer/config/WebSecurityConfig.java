@@ -1,8 +1,11 @@
 package com.creffer.config;
 
 import com.creffer.security.CustomLogoutSuccessHandler;
-import com.creffer.config.security.UserDetailsServiceImpl;
+import com.creffer.security.TokenAuthFilter;
+import com.creffer.services.security.TokenAuthManager;
+import com.creffer.services.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -12,8 +15,11 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.sql.DataSource;
@@ -22,11 +28,17 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan({"com.creffer"})
 @EnableWebSecurity
-//@EnableOAuth2Sso
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-    /*@Autowired
-    private UserDetailsServiceImpl userDetailsService;*/
+    @Autowired
+    @Qualifier("userDetailsService")
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    private TokenAuthManager tokenAuthManager;
+
+
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Value("${spring.queries.users-query}")
@@ -36,7 +48,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception{
-        http.csrf()
+
+        http.headers().frameOptions().sameOrigin()
+                .and()
+                .addFilterAfter(tokenAuthFilter(), UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/signup").permitAll()
+                .antMatchers("/imgs").permitAll()
+                .antMatchers("/css").permitAll()
+                .antMatchers("/js").permitAll()
+                .antMatchers("/main").permitAll()
+                .antMatchers("/track").permitAll()
+                .antMatchers("/doGame").permitAll()
+                .antMatchers("/manager/**").authenticated().and();
+
+        /*http.csrf()
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/admin/**").permitAll()//.hasRole("ADMIN")
@@ -55,7 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/main").permitAll()
                 .antMatchers("/track").permitAll()
                 .antMatchers("/doGame").permitAll()
-                .anyRequest().permitAll().and();
+                .anyRequest().permitAll().and();*/
         http.formLogin()
                 .loginPage("/login")
                 //.loginProcessingUrl("/adminDashboard")
@@ -77,20 +104,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         return new CustomLogoutSuccessHandler();
     }
 
-    /*@Bean
+    @Bean(name = "tokenAuthFilter")
+    public TokenAuthFilter tokenAuthFilter(){
+        TokenAuthFilter filter = new TokenAuthFilter();
+        tokenAuthManager.setUserDetailsService(userDetailsService);
+        filter.setAuthenticationManager(tokenAuthManager);
+        return filter;
+    }
+    @Bean(name = "userDetailsService")
     public UserDetailsServiceImpl getUserDetailsService(){
         return new UserDetailsServiceImpl();
-    }*/
+    }
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+        //auth.userDetailsService(userDetailsService);
         auth
-                //.userDetailsService(userDetailsService)
                 .jdbcAuthentication()
                 .usersByUsernameQuery(usersQuery)
                 .authoritiesByUsernameQuery(rolesQuery)
                 .dataSource(dataSource())
-                .passwordEncoder(bCryptPasswordEncoder);
+                .passwordEncoder(bCryptPasswordEncoder)
+        ;
+
     }
 
     @ConfigurationProperties(prefix = "datasource.primary")

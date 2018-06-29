@@ -1,4 +1,4 @@
-package com.creffer.config.security;
+package com.creffer.services.security;
 
 import com.creffer.models.users.UserModel;
 import com.creffer.services.users.user.UserService;
@@ -11,10 +11,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-@Service
+//@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserService userService;
@@ -22,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserModel userModel = userService.findUserByEmail(email);
-        Set<GrantedAuthority> roles = new HashSet<>();
+        List<GrantedAuthority> roles = new ArrayList<>();
         roles.add(new SimpleGrantedAuthority(userModel.getRoles().get(0).getRole()));
         return new User(userModel.getEmail(),userModel.getPassword(),roles);
     }

@@ -28,8 +28,8 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     @Autowired
     UserServiceImpl userService;
-    @Resource(name = "authenticationManager")
-    private AuthenticationManager authenticationManager;
+    /*@Resource(name = "authenticationManager")
+    private AuthenticationManager authenticationManager;*/
     public LoginController(){
         super();
     }
