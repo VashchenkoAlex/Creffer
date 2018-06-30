@@ -1,8 +1,10 @@
 package com.creffer.config;
 
 import com.creffer.security.CustomLogoutSuccessHandler;
-import com.creffer.security.TokenAuthFilter;
-import com.creffer.services.security.TokenAuthManager;
+import com.creffer.security.RestTokenAuthenticationFilter;
+import com.creffer.services.security.GetTokenService;
+import com.creffer.services.security.GetTokenServiceImpl;
+import com.creffer.services.security.TokenAuthenticationManager;
 import com.creffer.services.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,8 +17,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -35,9 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private TokenAuthManager tokenAuthManager;
+    private TokenAuthenticationManager tokenAuthenticationManager;
 
-
+    @Autowired
+    SecurityContextHolder securityContextHolder;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -49,19 +51,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(final HttpSecurity http) throws Exception{
 
-        http.headers().frameOptions().sameOrigin()
+        http.csrf()
+                .disable()
+                .headers().frameOptions().sameOrigin()
                 .and()
-                .addFilterAfter(tokenAuthFilter(), UsernamePasswordAuthenticationFilter.class)
-                .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/signup").permitAll()
-                .antMatchers("/imgs").permitAll()
-                .antMatchers("/css").permitAll()
-                .antMatchers("/js").permitAll()
-                .antMatchers("/main").permitAll()
-                .antMatchers("/track").permitAll()
-                .antMatchers("/doGame").permitAll()
-                .antMatchers("/manager/**").authenticated().and();
+                .addFilterAfter(restTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.authorizeRequests()
+            .antMatchers("/").permitAll()
+            //.antMatchers("/pages/**").permitAll()
+            .antMatchers("/signup").permitAll()
+            .antMatchers("/login").permitAll()
+            //.antMatchers("/imgs").permitAll()
+            //.antMatchers("/css/**").permitAll()
+            //.antMatchers("/js/**").permitAll()
+            .antMatchers("/main").permitAll()
+            .antMatchers("/track").permitAll()
+            .antMatchers("/doGame").permitAll()
+        .anyRequest().authenticated();
+        //.and().formLogin()
+        //.loginPage("/login").permitAll()
+        //.failureUrl("/login?error=true");
 
         /*http.csrf()
                 .disable()
@@ -83,7 +92,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/track").permitAll()
                 .antMatchers("/doGame").permitAll()
                 .anyRequest().permitAll().and();*/
-        http.formLogin()
+       /* http.formLogin()
                 .loginPage("/login")
                 //.loginProcessingUrl("/adminDashboard")
                 //.failureUrl("/login?error=true")
@@ -97,20 +106,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .logoutSuccessUrl("/login?logout")
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(logoutSuccessHandler())
-                .invalidateHttpSession(true);
+                .invalidateHttpSession(true);*/
     }
     @Bean
     public LogoutSuccessHandler logoutSuccessHandler(){
         return new CustomLogoutSuccessHandler();
     }
 
-    @Bean(name = "tokenAuthFilter")
-    public TokenAuthFilter tokenAuthFilter(){
-        TokenAuthFilter filter = new TokenAuthFilter();
+    /*@Bean(name = "tokenAuthFilter")
+    public RestTokenAuthenticationFilter tokenAuthFilter(){
+        RestTokenAuthenticationFilter filter = new RestTokenAuthenticationFilter();
         tokenAuthManager.setUserDetailsService(userDetailsService);
         filter.setAuthenticationManager(tokenAuthManager);
         return filter;
+    }*/
+
+    @Bean(name = "restTokenAuthenticationFilter")
+    public RestTokenAuthenticationFilter restTokenAuthenticationFilter() {
+        RestTokenAuthenticationFilter restTokenAuthenticationFilter = new RestTokenAuthenticationFilter();
+        tokenAuthenticationManager.setUserDetailsService(userDetailsService);
+        restTokenAuthenticationFilter.setAuthenticationManager(tokenAuthenticationManager);
+        return restTokenAuthenticationFilter;
     }
+
     @Bean(name = "userDetailsService")
     public UserDetailsServiceImpl getUserDetailsService(){
         return new UserDetailsServiceImpl();
@@ -118,16 +136,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        //auth.userDetailsService(userDetailsService);
-        auth
+        auth.userDetailsService(userDetailsService)
+        /*auth
                 .jdbcAuthentication()
                 .usersByUsernameQuery(usersQuery)
                 .authoritiesByUsernameQuery(rolesQuery)
-                .dataSource(dataSource())
+                .dataSource(dataSource())*/
                 .passwordEncoder(bCryptPasswordEncoder)
         ;
 
     }
+
+    /*@Bean(name = "GetTokenService")
+    protected GetTokenService getTokenService(){
+        return new GetTokenServiceImpl();
+    }*/
 
     @ConfigurationProperties(prefix = "datasource.primary")
     @Bean
@@ -136,5 +159,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         return DataSourceBuilder
                 .create()
                 .build();
+    }
+    @Bean
+    public SecurityContextHolder securityContextHolder(){
+        return new SecurityContextHolder();
     }
 }

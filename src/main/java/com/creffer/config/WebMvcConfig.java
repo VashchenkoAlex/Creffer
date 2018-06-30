@@ -15,8 +15,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 //@ComponentScan() - ?
 public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfigurer{
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
-            "classpath:/META-INF/resources/", "classpath:/resources/",
-            "classpath:/static/", "classpath:/public/" };
+            "classpath:/resources/",
+            "classpath:/static/"};
     @Autowired
     @Qualifier("jstlViewResolver")
     private ViewResolver jstlViewResolver;
@@ -50,19 +50,20 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfi
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-                .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
+                .addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS)
+                .setCachePeriod(31556926);
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         super.addViewControllers(registry);
-        registry.addViewController("/pages/login.html").setViewName("/login");
+        /*registry.addViewController("/pages/login.html").setViewName("/login");
         registry.addViewController("/pages/home.html").setViewName("/home");
         registry.addViewController("/pages/signup.html").setViewName("/signup");
         registry.addViewController("/pages/protected/publisher/dashboard.html").setViewName("/publisherDashboard");
         registry.addViewController("/pages/protected/admin/dashboard.html").setViewName("/adminDashboard");
         registry.addViewController("/pages/protected/advertiser/dashboard.html").setViewName("/advertiserDashboard");
-        registry.addViewController("/pages/protected/manager/dashboard.html").setViewName("/managerDashboard");
+        registry.addViewController("/pages/protected/manager/dashboard.html").setViewName("/managerDashboard");*/
     }
 
 }

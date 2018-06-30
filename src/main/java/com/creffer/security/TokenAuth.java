@@ -16,11 +16,13 @@ public class TokenAuth implements Authentication {
     private Object details;
 
     public TokenAuth(String token, HttpServletRequest request) {
+        System.out.println("set token at TokenAuth constructor1");
         this.token = token;
         this.details = request;
     }
 
     public TokenAuth(String token, Collection<? extends GrantedAuthority> authorities, boolean isAuthenticated, UserDetails principal) {
+        System.out.println("set token at TokenAuth constructor2");
         this.token = token;
         this.authorities = authorities;
         this.isAuthenticated = isAuthenticated;
@@ -130,11 +132,13 @@ public class TokenAuth implements Authentication {
      */
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+        System.out.println("Set Auth-d");
         this.isAuthenticated = isAuthenticated;
     }
 
     @Override
     public String getName() {
+        System.out.println("Username int Token Auth");
         if (principal!=null){
             return principal.getUsername();
         }
@@ -142,6 +146,7 @@ public class TokenAuth implements Authentication {
     }
 
     public String getToken() {
+        System.out.println("Get token");
         return token;
     }
 }

@@ -4,31 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Creffer | Login</title>
-    <link rel="stylesheet" href="/../css/bootstrap/bootstrap.min.css">
-    <script src="/../js/jquery/jquery-3.3.1.min.js"></script>
-    <script src="/../js/bootstrap/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/../css/login.css">
+    <link rel="stylesheet" href="/../css/bootstrap/bootstrap.min.css" type="text/css">
+    <script src="/../js/jquery/jquery-3.3.1.min.js" type="text/css"></script>
+    <script src="/../js/bootstrap/bootstrap.min.js" type="text/css"></script>
+    <script src="/../js/login.js" type="text/css"></script>
+    <link rel="stylesheet" href="/../css/login.css" type="text/css">
 </head>
 
 <body>
 <form>
     <input type="button" value="Sign Up" onClick='location.href="/signup"'>
 </form>
-
 <div class="container">
     <img src="/../imgs/login.jpg" class="img-responsive center-block" alt="Logo" />
-    <form class="form-signin" name="login" id="signIn" method="post">
+
+    <form class="form-signin" id="signIn1" method="post">
         <h3 class="form-signin-heading">"Welcome"</h3>
         <br/>
 
-        <input type="text" id="email" name="email"  placeholder="Email" class="form-control" /> <br/>
+        <input type="text" id="email11" name="email"  placeholder="Email" class="form-control" /> <br/>
         <input type="password"  placeholder="Password"
-               id="password" name="password" class="form-control" /> <br />
+               id="password1" name="password" class="form-control" /> <br />
 
-        <div align="center" id="errorData">
+        <div align="center" id="errorData1">
             <p>Email or Password invalid, please verify</p>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="submit">Login</button>
+        <button class="btn btn-lg btn-primary btn-block" id="loginSubmit1">Login</button>
     </form>
 </div>
 </body>

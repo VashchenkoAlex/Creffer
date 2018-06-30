@@ -1,5 +1,6 @@
 package com.creffer.services.security;
 
+import com.creffer.models.LoginModel;
 import com.creffer.models.system.TokenModel;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -16,7 +17,10 @@ public class GetTokenServiceImpl implements GetTokenService {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
     @Override
-    public TokenModel getToken(String email, String password, String ip) throws Exception {
+    public TokenModel getToken(LoginModel loginModel) throws Exception {
+        String password = loginModel.getPassword();
+        String email = loginModel.getEmail();
+        String ip = loginModel.getIp();
         if (email==null||password==null||ip==null){
             return null;
         }
@@ -29,7 +33,7 @@ public class GetTokenServiceImpl implements GetTokenService {
         if (password.equals(thePassword)){
 
             tokenData.put("clientType", role);
-            //tokenData.put("userID", user.getUserId().toString()); есть ли смысл и в этом?
+            tokenData.put("userIP", ip);
             tokenData.put("username", email);
             tokenData.put("token_create_date", new Date().getTime());
             Calendar calendar = Calendar.getInstance();

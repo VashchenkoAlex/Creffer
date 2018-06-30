@@ -7,6 +7,7 @@ import com.creffer.models.users.RoleModel;
 import com.creffer.repository.users.UserRepo;
 import com.creffer.repository.users.RoleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,8 @@ import java.util.Set;
 
 @Service("userServise")
 public class UserServiceImpl implements UserService {
+    @Autowired
+    SecurityContextHolder scHolder;
     @Autowired
     private UserRepo userRepo;
     @Autowired
@@ -62,6 +65,7 @@ public class UserServiceImpl implements UserService {
         success.setRole(user.getRoles().get(0).getRole());
         success.setStatus(user.getActive());
         boolean checkPass = bCryptPasswordEncoder.matches(loginModel.getPassword(),user.getPassword());
+        System.out.println("check pass = "+checkPass);
         success.setCorrectPassword(checkPass);
         return success;
     }

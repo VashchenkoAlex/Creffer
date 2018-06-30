@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.Date;
 
 @Service
-public class TokenAuthManager implements AuthenticationManager{
+public class TokenAuthenticationManager implements AuthenticationManager{
     @Autowired
     private UserDetailsService userDetailsService;
     /**

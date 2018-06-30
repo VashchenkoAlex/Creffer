@@ -23,6 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        System.out.println("we're getting user by email");
         UserModel userModel = userService.findUserByEmail(email);
         List<GrantedAuthority> roles = new ArrayList<>();
         roles.add(new SimpleGrantedAuthority(userModel.getRoles().get(0).getRole()));
