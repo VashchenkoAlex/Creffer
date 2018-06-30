@@ -3,17 +3,17 @@ package com.creffer.models.users;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.CredentialsContainer;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class UserModel implements Serializable {
+public class UserModel implements Serializable,UserDetails,CredentialsContainer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
@@ -97,11 +97,18 @@ public class UserModel implements Serializable {
     @Column(name = "password")
     @JsonView(EXPORT.class)
     private String password;
+    @Column(name = "live_password")
+    private boolean livePassword;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<RoleModel> roles;
+
+    @Override
+    public void eraseCredentials() {
+        password = null;
+    }
 
     //Accesses Markers
     public interface EXPORT{}
@@ -267,8 +274,83 @@ public class UserModel implements Serializable {
         this.notes = notes;
     }
 
+    public boolean isLivePassword() {
+        return livePassword;
+    }
+
+    public void setLivePassword(boolean livePassword) {
+        this.livePassword = livePassword;
+    }
+
+    /**
+     * Returns the authorities granted to the user. Cannot return <code>null</code>.
+     *
+     * @return the authorities, sorted by natural key (never <code>null</code>)
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * Returns the username used to authenticate the user. Cannot return <code>null</code>
+     * .
+     *
+     * @return the username (never <code>null</code>)
+     */
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    /**
+     * Indicates whether the user's account has expired. An expired account cannot be
+     * authenticated.
+     *
+     * @return <code>true</code> if the user's account is valid (ie non-expired),
+     * <code>false</code> if no longer valid (ie expired)
+     */
+    @Override
+    public boolean isAccountNonExpired() {
+        return active==2;
+    }
+
+    /**
+     * Indicates whether the user is locked or unlocked. A locked user cannot be
+     * authenticated.
+     *
+     * @return <code>true</code> if the user is not locked, <code>false</code> otherwise
+     */
+    @Override
+    public boolean isAccountNonLocked() {
+        return active==3;
+    }
+
+    /**
+     * Indicates whether the user's credentials (password) has expired. Expired
+     * credentials prevent authentication.
+     *
+     * @return <code>true</code> if the user's credentials are valid (ie non-expired),
+     * <code>false</code> if no longer valid (ie expired)
+     */
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return livePassword;
+    }
+
+    /**
+     * Indicates whether the user is enabled or disabled. A disabled user cannot be
+     * authenticated.
+     *
+     * @return <code>true</code> if the user is enabled, <code>false</code> otherwise
+     */
+    @Override
+    public boolean isEnabled() {
+        return active==1;
     }
 
     public void setPassword(String password) {
@@ -290,6 +372,7 @@ public class UserModel implements Serializable {
         UserModel userModel = (UserModel) o;
         return id == userModel.id &&
                 active == userModel.active &&
+                livePassword == userModel.livePassword &&
                 Objects.equals(email, userModel.email) &&
                 Objects.equals(company, userModel.company) &&
                 Objects.equals(skype, userModel.skype) &&
@@ -314,6 +397,6 @@ public class UserModel implements Serializable {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, email, company, skype, firstName, lastName, address1, address2, city, country, region, zip, phone, traffic, typeTraffic, companyUrl, info, active, notes, password, roles);
+        return Objects.hash(id, email, company, skype, firstName, lastName, address1, address2, city, country, region, zip, phone, traffic, typeTraffic, companyUrl, info, active, notes, password, livePassword, roles);
     }
 }

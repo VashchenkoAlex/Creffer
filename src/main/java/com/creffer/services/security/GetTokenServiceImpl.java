@@ -2,11 +2,14 @@ package com.creffer.services.security;
 
 import com.creffer.models.LoginModel;
 import com.creffer.models.system.TokenModel;
+import com.creffer.models.users.RoleModel;
+import com.creffer.models.users.UserModel;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.User;
 
@@ -15,25 +18,27 @@ import java.util.*;
 @Service
 public class GetTokenServiceImpl implements GetTokenService {
     @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
     private UserDetailsServiceImpl userDetailsService;
     @Override
     public TokenModel getToken(LoginModel loginModel) throws Exception {
         String password = loginModel.getPassword();
         String email = loginModel.getEmail();
-        String ip = loginModel.getIp();
-        if (email==null||password==null||ip==null){
+        //String ip = loginModel.getIp();
+        if (email==null||password==null){
             return null;
         }
-        User user = (User) userDetailsService.loadUserByUsername(email);
+        UserModel user = (UserModel) userDetailsService.loadUserByUsername(email);
         String thePassword = user.getPassword();
-        System.out.println("ThePassword is "+thePassword);
+
         Map<String,Object> tokenData = new HashMap<>();
-        ArrayList<GrantedAuthority> roles = (ArrayList<GrantedAuthority>) user.getAuthorities();
+        List<RoleModel> roles = user.getRoles();
         String role = roles.get(0).getAuthority();
-        if (password.equals(thePassword)){
+        if (bCryptPasswordEncoder.matches(password,thePassword)){
 
             tokenData.put("clientType", role);
-            tokenData.put("userIP", ip);
+            //tokenData.put("userIP", ip);
             tokenData.put("username", email);
             tokenData.put("token_create_date", new Date().getTime());
             Calendar calendar = Calendar.getInstance();

@@ -36,7 +36,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfi
         resolver.setSuffix(".html");
         return resolver;
     }
-    @Bean
+    @Bean(name = "bCryptPasswordEncoder")
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

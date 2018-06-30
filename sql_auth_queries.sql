@@ -1,8 +1,8 @@
 create database test;
-DROP TABLE IF EXISTS `role`;
-CREATE TABLE `role` (
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE `roles` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role` varchar(255) DEFAULT NULL,
+  `roles` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -28,9 +28,9 @@ CREATE TABLE `user_role` (
   PRIMARY KEY (`user_id`,`role_id`),
   KEY `FKa68196081fvovjhkek5m97n3y` (`role_id`),
   CONSTRAINT `FK859n2jvi8ivhui0rl0esws6o` FOREIGN KEY (`user_id`) REFERENCES `admins` (`admin_id`),
-  CONSTRAINT `FKa68196081fvovjhkek5m97n3y` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
+  CONSTRAINT `FKa68196081fvovjhkek5m97n3y` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `role` VALUES (1,'ADMIN');
-INSERT INTO `role` VALUES (2,'MANAGER');
-INSERT INTO `role` VALUES (3,'PUBLISHER');
-INSERT INTO `role` VALUES (4,'ADVERTISER');
+INSERT INTO `roles` VALUES (1,'ADMIN');
+INSERT INTO `roles` VALUES (2,'MANAGER');
+INSERT INTO `roles` VALUES (3,'PUBLISHER');
+INSERT INTO `roles` VALUES (4,'ADVERTISER');

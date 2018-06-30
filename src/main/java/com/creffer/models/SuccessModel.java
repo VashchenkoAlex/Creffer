@@ -1,10 +1,14 @@
 package com.creffer.models;
 
+import com.creffer.models.users.RoleModel;
+
+import java.util.List;
+
 public class SuccessModel {
     private String email;
     private int status;
     private String token;
-    private String role;
+    private List<RoleModel> roles;
     private boolean correctPassword;
 
     public SuccessModel() {
@@ -34,12 +38,12 @@ public class SuccessModel {
         this.token = token;
     }
 
-    public String getRole() {
-        return role;
+    public List<RoleModel> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(List<RoleModel> roles) {
+        this.roles = roles;
     }
 
     public boolean isCorrectPassword() {

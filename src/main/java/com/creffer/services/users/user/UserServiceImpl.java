@@ -12,9 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 @Service("userServise")
 public class UserServiceImpl implements UserService {
@@ -62,7 +59,7 @@ public class UserServiceImpl implements UserService {
         UserModel user = userRepo.findByEmail(loginModel.getEmail());
         SuccessModel success = new SuccessModel();
         success.setEmail(user.getEmail());
-        success.setRole(user.getRoles().get(0).getRole());
+        success.setRoles(user.getRoles());
         success.setStatus(user.getActive());
         boolean checkPass = bCryptPasswordEncoder.matches(loginModel.getPassword(),user.getPassword());
         System.out.println("check pass = "+checkPass);

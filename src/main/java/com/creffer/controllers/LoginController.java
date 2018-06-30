@@ -2,33 +2,27 @@ package com.creffer.controllers;
 
 import com.creffer.models.LoginModel;
 import com.creffer.models.SuccessModel;
-import com.creffer.models.users.UserModel;
+import com.creffer.models.system.TokenModel;
+import com.creffer.security.TokenAuth;
 import com.creffer.services.security.GetTokenService;
+import com.creffer.services.security.UserDetailsServiceImpl;
 import com.creffer.services.users.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/login")
 public class LoginController {
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
     /*@Resource(name = "authenticationManager")
     private AuthenticationManager authenticationManager;
     public LoginController(){
@@ -42,7 +36,7 @@ public class LoginController {
         return new ModelAndView("forward:/pages/login.html");
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces = "json/application")
+    @RequestMapping(method = RequestMethod.POST)
     //@ResponseStatus(value = HttpStatus.NO_CONTENT)
     public ModelAndView login(@ModelAttribute LoginModel loginModel, final HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
@@ -50,26 +44,30 @@ public class LoginController {
         mav.addObject(successModel);
         if (successModel.isCorrectPassword()&&successModel.getStatus()==1){
             try {
-                //SecurityContextHolder.getContext().setAuthentication();
-                tokenService.getToken(loginModel);
+                String token = tokenService.getToken(loginModel).getToken();
+                UserDetails userDetails = userDetailsService.loadUserByUsername(loginModel.getEmail());
 
-                if ("ADMIN".equals(successModel.getRole())) {
+                TokenAuth tokenAuth = new TokenAuth(token,successModel.getRoles(),successModel.isCorrectPassword(), userDetails);
+                SecurityContextHolder.getContext().setAuthentication(tokenAuth);
+                String role = successModel.getRoles().get(0).getRole();
+                if ("ADMIN".equals(role)) {
                     System.out.println("Admin Passed");
                     mav.setViewName("forward:/pages/protected/admin/dashboard.html");
                 }
-                if ("MANAGER".equals(successModel.getRole())) {
+                if ("MANAGER".equals(role)) {
                     System.out.println("Manager Passed");
                     mav.setViewName("forward:/pages/protected/manager/dashboard.html");
                 }
-                if ("PUBLISHER".equals(successModel.getRole())) {
+                if ("PUBLISHER".equals(role)) {
                     System.out.println("Publisher Passed");
                     mav.setViewName("forward:/pages/protected/publisher/dashboard.html");
                 }
-                if ("ADVERTISER".equals(successModel.getRole())) {
+                if ("ADVERTISER".equals(role)) {
                     System.out.println(" Advertiser Passed");
                     mav.setViewName("forward:/pages/protected/advertiser/dashboard.html");
                 }
             }catch (Exception ex){
+                ex.printStackTrace();
                 System.out.println("Auth error");
             }
         }else{
@@ -90,11 +88,5 @@ public class LoginController {
         sc.setAuthentication(auth);
         HttpSession session = request.getSession(true);
         session.setAttribute("SPRING_SECURITY_CONTEXT",sc);
-    }
-
-    @RequestMapping(value = "/print", method = RequestMethod.POST)
-    public void printUser(){
-        SecurityContext sc = SecurityContextHolder.getContext();
-        System.out.println("Logged User: "+sc.getAuthentication().getName());
     }*/
 }

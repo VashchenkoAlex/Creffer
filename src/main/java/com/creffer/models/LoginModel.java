@@ -3,7 +3,7 @@ package com.creffer.models;
 public class LoginModel {
     private String email;
     private String password;
-    private String ip;
+    //private String ip;
 
     public String getEmail() {
         return email;
@@ -21,13 +21,13 @@ public class LoginModel {
         this.password = password;
     }
 
-    public String getIp() {
+    /*public String getIp() {
         return ip;
     }
 
     public void setIp(String ip) {
         this.ip = ip;
-    }
+    }*/
 
     public LoginModel() {
     }

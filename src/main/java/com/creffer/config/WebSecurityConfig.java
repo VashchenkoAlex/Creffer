@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .antMatchers("/login").permitAll()
             //.antMatchers("/imgs").permitAll()
             //.antMatchers("/css/**").permitAll()
-            //.antMatchers("/js/**").permitAll()
+            .antMatchers("/js/**").permitAll()
             .antMatchers("/main").permitAll()
             .antMatchers("/track").permitAll()
             .antMatchers("/doGame").permitAll()
@@ -113,14 +113,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         return new CustomLogoutSuccessHandler();
     }
 
-    /*@Bean(name = "tokenAuthFilter")
-    public RestTokenAuthenticationFilter tokenAuthFilter(){
-        RestTokenAuthenticationFilter filter = new RestTokenAuthenticationFilter();
-        tokenAuthManager.setUserDetailsService(userDetailsService);
-        filter.setAuthenticationManager(tokenAuthManager);
-        return filter;
-    }*/
-
     @Bean(name = "restTokenAuthenticationFilter")
     public RestTokenAuthenticationFilter restTokenAuthenticationFilter() {
         RestTokenAuthenticationFilter restTokenAuthenticationFilter = new RestTokenAuthenticationFilter();
@@ -137,20 +129,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
-        /*auth
-                .jdbcAuthentication()
-                .usersByUsernameQuery(usersQuery)
-                .authoritiesByUsernameQuery(rolesQuery)
-                .dataSource(dataSource())*/
                 .passwordEncoder(bCryptPasswordEncoder)
         ;
 
     }
-
-    /*@Bean(name = "GetTokenService")
-    protected GetTokenService getTokenService(){
-        return new GetTokenServiceImpl();
-    }*/
 
     @ConfigurationProperties(prefix = "datasource.primary")
     @Bean

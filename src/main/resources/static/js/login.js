@@ -1,9 +1,11 @@
 //$('#errorData').
-$('#loginSubmit1').click(function () {
+
+$('#loginSubmit').click(function () {
     const url = "/signup";
-    let email = $('#email1').value;
-    let password = $('#password1').value;
+    let email = $('#email').value;
+    let password = $('#password').value;
     let data = {email:email,password:password};
+    alert(data);
     console.log(data);
     /*$.ajax({
         url:url,
