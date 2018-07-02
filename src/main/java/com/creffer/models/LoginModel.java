@@ -1,6 +1,6 @@
 package com.creffer.models;
 
-public class LoginModel {
+public class LoginModel{
     private String email;
     private String password;
     //private String ip;

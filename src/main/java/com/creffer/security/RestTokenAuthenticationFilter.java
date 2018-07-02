@@ -18,9 +18,13 @@ public class RestTokenAuthenticationFilter extends AbstractAuthenticationProcess
         super("/pages/protected/**");
         setAuthenticationSuccessHandler((request,response,authentication)->
         {
-            System.out.println("we're at Token Auth Filter");
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            request.getRequestDispatcher(request.getServletPath()+request.getPathInfo()).forward(request,response);
+            String path = request.getServletPath();
+            if (request.getPathInfo()!=null) {
+                path += request.getPathInfo();
+            }
+            System.out.println("Path = "+path);
+            request.getRequestDispatcher(path).forward(request,response);
         });
         setAuthenticationFailureHandler((request,response,authenticationException)->{
             System.out.println("Authentication Failure");
@@ -48,5 +52,6 @@ public class RestTokenAuthenticationFilter extends AbstractAuthenticationProcess
     @Override
     public void doFilter(ServletRequest rq, ServletResponse rp, FilterChain chain)throws IOException,ServletException{
         super.doFilter(rq, rp, chain);
+        System.out.println("overrided doFilter() -  RestTokenAuthFilter.class");
     }
 }

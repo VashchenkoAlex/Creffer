@@ -8,6 +8,8 @@ import com.creffer.services.security.GetTokenService;
 import com.creffer.services.security.UserDetailsServiceImpl;
 import com.creffer.services.users.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/login")
@@ -23,8 +28,9 @@ public class LoginController {
     private UserServiceImpl userService;
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
-    /*@Resource(name = "authenticationManager")
+    @Autowired
     private AuthenticationManager authenticationManager;
+    /*
     public LoginController(){
         super();
     }*/
@@ -37,42 +43,43 @@ public class LoginController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
     //@ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ModelAndView login(@ModelAttribute LoginModel loginModel, final HttpServletRequest request){
+    public ModelAndView login(@RequestParam("email") final String email,
+                              @RequestParam("password") final String password,
+                              final HttpServletRequest request,
+                              final HttpServletResponse response){
         ModelAndView mav = new ModelAndView();
-        SuccessModel successModel = userService.validateUser(loginModel);
-        mav.addObject(successModel);
+        SuccessModel successModel = userService.validateUser(email, password);
+        HttpSession session = request.getSession(true);
+        session.setAttribute("SPRING_SECURITY_CONTEXT",SecurityContextHolder.getContext());
+        //mav.addObject("token",authentication.getToken());
         if (successModel.isCorrectPassword()&&successModel.getStatus()==1){
+            response.setStatus(HttpServletResponse.SC_OK);
             try {
-                String token = tokenService.getToken(loginModel).getToken();
-                UserDetails userDetails = userDetailsService.loadUserByUsername(loginModel.getEmail());
-
-                TokenAuth tokenAuth = new TokenAuth(token,successModel.getRoles(),successModel.isCorrectPassword(), userDetails);
-                SecurityContextHolder.getContext().setAuthentication(tokenAuth);
                 String role = successModel.getRoles().get(0).getRole();
-                if ("ADMIN".equals(role)) {
-                    System.out.println("Admin Passed");
-                    mav.setViewName("forward:/pages/protected/admin/dashboard.html");
+                if ("ROLE_ADMIN".equals(role)) {
+                    mav.setViewName("redirect:/adminDashboard");
                 }
-                if ("MANAGER".equals(role)) {
+                if ("ROLE_MANAGER".equals(role)) {
                     System.out.println("Manager Passed");
-                    mav.setViewName("forward:/pages/protected/manager/dashboard.html");
+                    mav.setViewName("redirect:/managerDashboard");
                 }
-                if ("PUBLISHER".equals(role)) {
+                if ("ROLE_PUBLISHER".equals(role)) {
                     System.out.println("Publisher Passed");
-                    mav.setViewName("forward:/pages/protected/publisher/dashboard.html");
+                    mav.setViewName("redirect:/publisherDashboard");
                 }
-                if ("ADVERTISER".equals(role)) {
+                if ("ROLE_ADVERTISER".equals(role)) {
                     System.out.println(" Advertiser Passed");
-                    mav.setViewName("forward:/pages/protected/advertiser/dashboard.html");
+                    mav.setViewName("redirect:advertiserDashboard");
                 }
             }catch (Exception ex){
-                ex.printStackTrace();
                 System.out.println("Auth error");
+                mav.setViewName("forward:/login?error=true");
             }
         }else{
             System.out.println("Login Error");
-            mav.setViewName("/login?error=true");
+            mav.setViewName("forward:/login?error=true");
         }
 
         return mav;

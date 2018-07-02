@@ -14,6 +14,7 @@ public class TokenAuth implements Authentication {
     private boolean isAuthenticated;
     private UserDetails principal;
     private Object details;
+    private String credentials;
 
     public TokenAuth(String token, HttpServletRequest request) {
         System.out.println("set token at TokenAuth constructor1");
@@ -21,12 +22,17 @@ public class TokenAuth implements Authentication {
         this.details = request;
     }
 
-    public TokenAuth(String token, Collection<? extends GrantedAuthority> authorities, boolean isAuthenticated, UserDetails principal) {
+    public TokenAuth(String token,
+                     Collection<? extends GrantedAuthority> authorities,
+                     boolean isAuthenticated,
+                     UserDetails principal,
+                     String credentials) {
         System.out.println("set token at TokenAuth constructor2");
         this.token = token;
         this.authorities = authorities;
         this.isAuthenticated = isAuthenticated;
         this.principal = principal;
+        this.credentials = credentials;
     }
 
     /**
@@ -56,7 +62,7 @@ public class TokenAuth implements Authentication {
      */
     @Override
     public Object getCredentials() {
-        return null;
+        return credentials;
     }
 
     /**
@@ -138,7 +144,7 @@ public class TokenAuth implements Authentication {
 
     @Override
     public String getName() {
-        System.out.println("Username int Token Auth");
+        System.out.println("getName() -  TokenAuth.class");
         if (principal!=null){
             return principal.getUsername();
         }
@@ -146,7 +152,7 @@ public class TokenAuth implements Authentication {
     }
 
     public String getToken() {
-        System.out.println("Get token");
+        System.out.println("getToken() TokenAuth.class");
         return token;
     }
 }

@@ -10,5 +10,5 @@ public interface UserService {
     void saveManager(UserModel user);
     void saveAdmin(UserModel user);
     void saveAdvertiser(UserModel user);
-    SuccessModel validateUser(LoginModel loginModel);
+    SuccessModel validateUser(String email, String password);
 }

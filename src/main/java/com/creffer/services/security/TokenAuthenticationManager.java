@@ -48,6 +48,7 @@ public class TokenAuthenticationManager implements AuthenticationManager{
      */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        System.out.println("authenticate() - TokenAthenticationManager.class");
         try{
             if (authentication instanceof TokenAuth){
                 return processAuth((TokenAuth) authentication);
@@ -63,16 +64,18 @@ public class TokenAuthenticationManager implements AuthenticationManager{
     }
 
     private TokenAuth buildFullTokenAuth(TokenAuth auth, DefaultClaims claims){
+        System.out.println("есть шанс получить класс каст ексепшн");
         User user = (User) userDetailsService.loadUserByUsername(claims.get("EMAIL",String.class));
         if (user.isEnabled()){
             Collection<GrantedAuthority> authorities = user.getAuthorities();
-            return new TokenAuth(auth.getToken(),authorities,true,user);
+            return new TokenAuth(auth.getToken(),authorities,true,user,user.getPassword());
         }else {
             throw new AuthenticationServiceException("User disabled");
         }
     }
 
     private TokenAuth processAuth(TokenAuth auth) throws AuthenticationException{
+        System.out.println("processAuth() - TokenAuthenticationManager.class");
         String token = auth.getToken();
         String key = "creffer2018";
         DefaultClaims claims;
@@ -90,13 +93,5 @@ public class TokenAuthenticationManager implements AuthenticationManager{
         }else {
             throw new AuthenticationServiceException("Token expired date error");
         }
-    }
-
-    public UserDetailsService getUserDetailsService() {
-        return userDetailsService;
-    }
-
-    public void setUserDetailsService(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
     }
 }

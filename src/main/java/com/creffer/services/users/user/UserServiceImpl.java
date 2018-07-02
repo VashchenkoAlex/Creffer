@@ -6,7 +6,10 @@ import com.creffer.models.users.UserModel;
 import com.creffer.models.users.RoleModel;
 import com.creffer.repository.users.UserRepo;
 import com.creffer.repository.users.RoleRepo;
+import com.creffer.security.TokenAuth;
+import com.creffer.services.security.GetTokenServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,7 +19,7 @@ import java.util.ArrayList;
 @Service("userServise")
 public class UserServiceImpl implements UserService {
     @Autowired
-    SecurityContextHolder scHolder;
+    private GetTokenServiceImpl getTokenService;
     @Autowired
     private UserRepo userRepo;
     @Autowired
@@ -55,14 +58,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SuccessModel validateUser(LoginModel loginModel) {
-        UserModel user = userRepo.findByEmail(loginModel.getEmail());
+    public SuccessModel validateUser(String email, String password) {
+        String token = "";
+        UserModel user = userRepo.findByEmail(email);
+        String correctPassword = user.getPassword();
         SuccessModel success = new SuccessModel();
+        try {
+           token = getTokenService.getToken(email,password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        boolean checkPass = bCryptPasswordEncoder.matches(password,correctPassword);
+        TokenAuth tokenAuth = new TokenAuth(token,user.getRoles(),checkPass,user,correctPassword);
+        SecurityContextHolder.getContext().setAuthentication(tokenAuth);
         success.setEmail(user.getEmail());
         success.setRoles(user.getRoles());
         success.setStatus(user.getActive());
-        boolean checkPass = bCryptPasswordEncoder.matches(loginModel.getPassword(),user.getPassword());
-        System.out.println("check pass = "+checkPass);
         success.setCorrectPassword(checkPass);
         return success;
     }

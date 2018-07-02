@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping(value = {"/","/main"})
 public class MainPageController {
-    @RequestMapping(value = {"/","/main"},method = RequestMethod.GET,produces = "text/html")
-    public ModelAndView mainPage(){
-        return new ModelAndView("main");
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView mainGet(){
+        return new ModelAndView("/main");
+    }
+    @RequestMapping(method = RequestMethod.POST)
+    public ModelAndView mainPost(){
+        return new ModelAndView("forward:/main");
     }
 }

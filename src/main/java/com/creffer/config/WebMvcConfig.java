@@ -12,10 +12,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-//@ComponentScan() - ?
 public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfigurer{
     private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
-            "classpath:/resources/",
             "classpath:/static/"};
     @Autowired
     @Qualifier("jstlViewResolver")
@@ -57,13 +55,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfi
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         super.addViewControllers(registry);
-        /*registry.addViewController("/pages/login.html").setViewName("/login");
-        registry.addViewController("/pages/home.html").setViewName("/home");
-        registry.addViewController("/pages/signup.html").setViewName("/signup");
-        registry.addViewController("/pages/protected/publisher/dashboard.html").setViewName("/publisherDashboard");
-        registry.addViewController("/pages/protected/admin/dashboard.html").setViewName("/adminDashboard");
-        registry.addViewController("/pages/protected/advertiser/dashboard.html").setViewName("/advertiserDashboard");
-        registry.addViewController("/pages/protected/manager/dashboard.html").setViewName("/managerDashboard");*/
     }
 
 }

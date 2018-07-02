@@ -22,9 +22,7 @@ public class GetTokenServiceImpl implements GetTokenService {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
     @Override
-    public TokenModel getToken(LoginModel loginModel) throws Exception {
-        String password = loginModel.getPassword();
-        String email = loginModel.getEmail();
+    public String getToken(String email, String password) throws Exception {
         //String ip = loginModel.getIp();
         if (email==null||password==null){
             return null;
@@ -51,7 +49,7 @@ public class GetTokenServiceImpl implements GetTokenService {
             //  JWT key
             String key = "creffer2018";
             String token = jwtBuilder.signWith(SignatureAlgorithm.HS512, key).compact();
-            return new TokenModel(token,email);
+            return token;
         }else {
             throw new Exception("Authentication error");
         }

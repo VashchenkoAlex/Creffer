@@ -1,16 +1,17 @@
-package com.creffer.controllers.admin;
+package com.creffer.controllers.manager;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/adminDashboard")
-public class DashBoardController {
+@RequestMapping(value = "/managerDashboard")
+public class ManagerDashBoardController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView dashGet(){
-        System.out.println("/adminDashboard");
-        return new ModelAndView("forward:/pages/protected/admin/dashboard.html");
+        System.out.println("/managerDashboard");
+        return new ModelAndView("/protected/manager/dashboard");
         //return new ModelAndView("forward:/pages/protected/admin/dashboard.html");
     }
     @RequestMapping(method = RequestMethod.POST,produces = "text/html")
@@ -19,6 +20,6 @@ public class DashBoardController {
         session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
         response.setStatus(HttpServletResponse.SC_OK);
         return "redirect:/pages/protected/admin/dashboard.html";*/
-        return new ModelAndView("forward:/pages/protected/admin/dashboard.html");
+        return new ModelAndView("forward:/pages/protected/manager/dashboard.html");
     }
 }
