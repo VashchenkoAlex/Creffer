@@ -2,6 +2,7 @@ package com.creffer.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
@@ -11,6 +12,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class RestTokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
@@ -35,23 +37,20 @@ public class RestTokenAuthenticationFilter extends AbstractAuthenticationProcess
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
-        String token = request.getHeader("token");
-        if (token==null){
-            token = request.getParameter("token");
-        }
+        SecurityContext securityContext = (SecurityContext) request.getSession(true).getAttribute("SPRING_SECURITY_CONTEXT");
+        TokenAuth tokenAuth = (TokenAuth) securityContext.getAuthentication();
+        String token = tokenAuth.getToken();
         if (token==null){
             System.out.println("Set Auth false");
-            TokenAuth tokenAuth = new TokenAuth(null,null);
+            tokenAuth = new TokenAuth(null,null);
             tokenAuth.setAuthenticated(false);
             return tokenAuth;
         }
-        TokenAuth tokenAuth = new TokenAuth(token,request);
         return getAuthenticationManager().authenticate(tokenAuth);
     }
 
     @Override
     public void doFilter(ServletRequest rq, ServletResponse rp, FilterChain chain)throws IOException,ServletException{
         super.doFilter(rq, rp, chain);
-        System.out.println("overrided doFilter() -  RestTokenAuthFilter.class");
     }
 }

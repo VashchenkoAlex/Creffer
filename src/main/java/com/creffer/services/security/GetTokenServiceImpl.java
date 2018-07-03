@@ -38,10 +38,12 @@ public class GetTokenServiceImpl implements GetTokenService {
             tokenData.put("clientType", role);
             //tokenData.put("userIP", ip);
             tokenData.put("username", email);
-            tokenData.put("token_create_date", new Date().getTime());
+            long createDate = new Date().getTime();
+            tokenData.put("token_create_date", createDate);
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.YEAR, 100);
-            tokenData.put("token_expiration_date", calendar.getTime());
+            long expDate = createDate + 1000000;
+            tokenData.put("token_expiration_date", expDate);
 
             JwtBuilder jwtBuilder = Jwts.builder();
             jwtBuilder.setExpiration(calendar.getTime());

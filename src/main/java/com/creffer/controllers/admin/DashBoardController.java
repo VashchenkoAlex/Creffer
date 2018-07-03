@@ -1,16 +1,24 @@
 package com.creffer.controllers.admin;
 
+import org.springframework.http.HttpRequest;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "/adminDashboard")
 public class DashBoardController {
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView dashGet(){
+    public ModelAndView dashGet(HttpServletRequest request){
         System.out.println("/adminDashboard");
-        return new ModelAndView("forward:/pages/protected/admin/dashboard.html");
+        HttpSession session = request.getSession(true);
+        SecurityContextHolder.setContext((SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT"));
+        return new ModelAndView("/protected/admin/dashboard");
         //return new ModelAndView("forward:/pages/protected/admin/dashboard.html");
     }
     @RequestMapping(method = RequestMethod.POST,produces = "text/html")

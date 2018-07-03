@@ -1,5 +1,6 @@
 package com.creffer.services.security;
 
+import com.creffer.models.users.UserModel;
 import com.creffer.security.TokenAuth;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.impl.DefaultClaims;
@@ -48,7 +49,6 @@ public class TokenAuthenticationManager implements AuthenticationManager{
      */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        System.out.println("authenticate() - TokenAthenticationManager.class");
         try{
             if (authentication instanceof TokenAuth){
                 return processAuth((TokenAuth) authentication);
@@ -64,10 +64,9 @@ public class TokenAuthenticationManager implements AuthenticationManager{
     }
 
     private TokenAuth buildFullTokenAuth(TokenAuth auth, DefaultClaims claims){
-        System.out.println("есть шанс получить класс каст ексепшн");
-        User user = (User) userDetailsService.loadUserByUsername(claims.get("EMAIL",String.class));
+        UserModel user = (UserModel) userDetailsService.loadUserByUsername(claims.get("username",String.class));
         if (user.isEnabled()){
-            Collection<GrantedAuthority> authorities = user.getAuthorities();
+            Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
             return new TokenAuth(auth.getToken(),authorities,true,user,user.getPassword());
         }else {
             throw new AuthenticationServiceException("User disabled");
@@ -84,10 +83,10 @@ public class TokenAuthenticationManager implements AuthenticationManager{
         }catch (Exception ex){
             throw new AuthenticationServiceException("Token corrupted");
         }
-        if (claims.get("TOKEN_EXPIRATION_DATE",Long.class)==null){
+        if (claims.get("token_expiration_date",Long.class)==null){
             throw new AuthenticationServiceException("Invalid token");
         }
-        Date expiredDate = new Date(claims.get("TOKEN_EXPIRATION_DATE",Long.class));
+        Date expiredDate = new Date(claims.get("token_expiration_date",Long.class));
         if (expiredDate.after(new Date())){
             return buildFullTokenAuth(auth,claims);
         }else {

@@ -86,7 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .antMatchers("/track").permitAll()
             .antMatchers("/doGame").permitAll()
             .antMatchers("/managerDashboard").permitAll()
-            .antMatchers("./pages/protected/manager/**").permitAll()
+            .antMatchers("/pages/protected/manager/**").permitAll()
                 .antMatchers("/adminDashboard").hasRole("ADMIN")
                 //.antMatchers("/pages/protected/admin/**").hasRole("ADMIN")
         .anyRequest().authenticated().accessDecisionManager(decisionManager);

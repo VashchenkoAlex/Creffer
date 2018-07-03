@@ -39,17 +39,20 @@ public class TokenAuthProvider implements AuthenticationProvider{
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         System.out.println("authenticate() TokenAuthProvider");
         String email = authentication.getName();
-        String pass = authentication.getCredentials().toString();
-        UserModel user = userService.findUserByEmail(email);
-        if(user.getPassword().equals(pass)){
-            final List<RoleModel> grantedAuths  = user.getRoles();
-            Authentication authent = null;
-            try {
-                authent = new TokenAuth(getTokenService.getToken(email,pass),grantedAuths,true,user,pass);
-            } catch (Exception e) {
-                e.printStackTrace();
+        Object credentials = authentication.getCredentials();
+        if (credentials!=null) {
+            String pass = credentials.toString();
+            UserModel user = userService.findUserByEmail(email);
+            if (user.getPassword().equals(pass)) {
+                final List<RoleModel> grantedAuths = user.getRoles();
+                Authentication authent = null;
+                try {
+                    authent = new TokenAuth(getTokenService.getToken(email, pass), grantedAuths, true, user, pass);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return authent;
             }
-            return authent;
         }
         return null;
     }
