@@ -60,7 +60,8 @@ public class CrefVoter implements AccessDecisionVoter{
         System.out.println("vote() - CrefVoter.class");
         int result = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
-                .filter("ADMIN"::equals).findAny()
+                .filter("ADMIN"::equals)
+                .findAny()
                 .map(s-> ACCESS_DENIED).orElseGet(()->ACCESS_ABSTAIN);
         System.out.println("Result = "+result);
         return result;

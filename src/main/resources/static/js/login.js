@@ -1,7 +1,7 @@
 //$('#errorData').
 
 $('#loginSubmit').click(function () {
-    const url = "/signup";
+    const url = "/login";
     let email = $('#email').value;
     let password = $('#password').value;
     let data = {email:email,password:password};

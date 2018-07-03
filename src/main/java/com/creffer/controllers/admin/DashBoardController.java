@@ -16,9 +16,7 @@ public class DashBoardController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView dashGet(HttpServletRequest request){
         System.out.println("/adminDashboard");
-        HttpSession session = request.getSession(true);
-        SecurityContextHolder.setContext((SecurityContext) session.getAttribute("SPRING_SECURITY_CONTEXT"));
-        return new ModelAndView("/protected/admin/dashboard");
+        return new ModelAndView("redirect:/pages/protected/admin/dashboard");
         //return new ModelAndView("forward:/pages/protected/admin/dashboard.html");
     }
     @RequestMapping(method = RequestMethod.POST,produces = "text/html")

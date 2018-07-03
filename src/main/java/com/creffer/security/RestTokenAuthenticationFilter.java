@@ -39,9 +39,7 @@ public class RestTokenAuthenticationFilter extends AbstractAuthenticationProcess
             throws AuthenticationException, IOException, ServletException {
         SecurityContext securityContext = (SecurityContext) request.getSession(true).getAttribute("SPRING_SECURITY_CONTEXT");
         TokenAuth tokenAuth = (TokenAuth) securityContext.getAuthentication();
-        String token = tokenAuth.getToken();
-        if (token==null){
-            System.out.println("Set Auth false");
+        if (tokenAuth==null){
             tokenAuth = new TokenAuth(null,null);
             tokenAuth.setAuthenticated(false);
             return tokenAuth;

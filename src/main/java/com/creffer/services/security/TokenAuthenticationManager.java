@@ -49,7 +49,9 @@ public class TokenAuthenticationManager implements AuthenticationManager{
      */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        System.out.println("authenticate() - TokenAuthenticationManager ");
         try{
+            //Возможно тут стоит сделать дополнительную проверку isAuthenticated и выход из цикла
             if (authentication instanceof TokenAuth){
                 return processAuth((TokenAuth) authentication);
             }else {
@@ -66,8 +68,10 @@ public class TokenAuthenticationManager implements AuthenticationManager{
     private TokenAuth buildFullTokenAuth(TokenAuth auth, DefaultClaims claims){
         UserModel user = (UserModel) userDetailsService.loadUserByUsername(claims.get("username",String.class));
         if (user.isEnabled()){
-            Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
-            return new TokenAuth(auth.getToken(),authorities,true,user,user.getPassword());
+            //Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
+            auth.setAuthenticated(true);
+            return auth;
+            //return new TokenAuth(auth.getToken(),authorities,true,user,user.getPassword());
         }else {
             throw new AuthenticationServiceException("User disabled");
         }
@@ -92,5 +96,9 @@ public class TokenAuthenticationManager implements AuthenticationManager{
         }else {
             throw new AuthenticationServiceException("Token expired date error");
         }
+    }
+
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 }

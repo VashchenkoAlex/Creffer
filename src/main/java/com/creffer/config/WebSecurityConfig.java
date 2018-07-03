@@ -3,9 +3,11 @@ package com.creffer.config;
 import com.creffer.security.CustomLogoutSuccessHandler;
 import com.creffer.security.RestTokenAuthenticationFilter;
 import com.creffer.security.access_handlers.CrefDeniedHandler;
+import com.creffer.security.access_handlers.CrefFailureHandler;
 import com.creffer.security.access_handlers.CrefSuccessHandler;
 import com.creffer.security.access_vouters.CrefVoter;
 import com.creffer.services.security.UserDetailsServiceImpl;
+import com.creffer.services.security.TokenAuthenticationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +19,6 @@ import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -51,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private AuthenticationManager tokenAuthenticationManager;
+    private TokenAuthenticationManager tokenAuthenticationManager;
     @Autowired
     private AuthenticationProvider tokenAuthProvider;
 
@@ -69,7 +70,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception{
-
         http.csrf()
                 .disable()
                 .headers().frameOptions().sameOrigin()
@@ -89,8 +89,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .antMatchers("/pages/protected/manager/**").permitAll()
                 .antMatchers("/adminDashboard").hasRole("ADMIN")
                 //.antMatchers("/pages/protected/admin/**").hasRole("ADMIN")
-        .anyRequest().authenticated().accessDecisionManager(decisionManager);
-        //http.formLogin()/*.loginPage("/login")*/.successHandler(crefSuccessHandler);
+        .antMatchers("/protected/**").authenticated().accessDecisionManager(decisionManager);
+        http.formLogin()
+                .loginPage("/login")
+                .successHandler(new CrefSuccessHandler())
+                .failureHandler(new CrefFailureHandler());
     }
     @Bean
     public LogoutSuccessHandler logoutSuccessHandler(){
@@ -100,6 +103,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Bean(name = "restTokenAuthenticationFilter")
     public RestTokenAuthenticationFilter restTokenAuthenticationFilter() {
         RestTokenAuthenticationFilter restTokenAuthenticationFilter = new RestTokenAuthenticationFilter();
+        tokenAuthenticationManager.setUserDetailsService(userDetailsService);
         restTokenAuthenticationFilter.setAuthenticationManager(tokenAuthenticationManager);
         return restTokenAuthenticationFilter;
     }

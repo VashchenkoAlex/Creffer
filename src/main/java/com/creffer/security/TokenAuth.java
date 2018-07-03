@@ -1,14 +1,18 @@
 package com.creffer.security;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
+import java.security.Principal;
 import java.util.Collection;
 
-public class TokenAuth implements Authentication {
+
+public class TokenAuth implements Authentication,Serializable,Principal,CredentialsContainer {
     private String token;
     private Collection<? extends GrantedAuthority> authorities;
     private boolean isAuthenticated;
@@ -151,8 +155,18 @@ public class TokenAuth implements Authentication {
         return null;
     }
 
+    @Override
+    public boolean implies(Subject subject) {
+        return subject != null && subject.getPrincipals().contains(this);
+    }
+
     public String getToken() {
         System.out.println("getToken() TokenAuth.class");
         return token;
+    }
+
+    @Override
+    public void eraseCredentials() {
+        this.credentials = null;
     }
 }

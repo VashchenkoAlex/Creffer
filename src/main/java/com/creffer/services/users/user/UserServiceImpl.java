@@ -1,6 +1,5 @@
 package com.creffer.services.users.user;
 
-import com.creffer.models.LoginModel;
 import com.creffer.models.SuccessModel;
 import com.creffer.models.users.UserModel;
 import com.creffer.models.users.RoleModel;
@@ -9,7 +8,6 @@ import com.creffer.repository.users.RoleRepo;
 import com.creffer.security.TokenAuth;
 import com.creffer.services.security.GetTokenServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -71,10 +69,8 @@ public class UserServiceImpl implements UserService {
         boolean checkPass = bCryptPasswordEncoder.matches(password,correctPassword);
         TokenAuth tokenAuth = new TokenAuth(token,user.getRoles(),checkPass,user,correctPassword);
         SecurityContextHolder.getContext().setAuthentication(tokenAuth);
-        success.setEmail(user.getEmail());
         success.setRoles(user.getRoles());
-        success.setStatus(user.getActive());
-        success.setCorrectPassword(checkPass);
+        success.setAccessed(checkPass&&user.getActive()==1);
         return success;
     }
 }

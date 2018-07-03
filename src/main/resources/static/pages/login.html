@@ -18,18 +18,18 @@
 <div class="container">
     <img src="/../imgs/login.jpg" class="img-responsive center-block" alt="Logo" />
 
-    <form class="form-signin" id="signIn" method="post">
+    <form class="form-signin" id="signIn" name="login" method="post">
         <h3 class="form-signin-heading">"Welcome"</h3>
         <br/>
 
         <input type="text" id="email" name="email"  placeholder="Email" class="form-control" /> <br/>
         <input type="password"  placeholder="Password"
-               id="password1" name="password" class="form-control" /> <br />
+               id="password" name="password" class="form-control" /> <br />
 
         <div align="center" id="errorData">
             <p>Email or Password invalid, please verify</p>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" id="loginSubmit">Login</button>
+        <button class="btn btn-lg btn-primary btn-block" id="loginSubmit" type="submit">Login</button>
     </form>
 </div>
 </body>
