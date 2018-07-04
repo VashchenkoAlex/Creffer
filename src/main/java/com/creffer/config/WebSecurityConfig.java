@@ -80,6 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.authorizeRequests()
             .antMatchers("/").permitAll()
             .antMatchers("/signup").permitAll()
+            .antMatchers("/manager/dashboard").permitAll()
             .antMatchers("/login").permitAll()
             .antMatchers("/js/**").permitAll()
             .antMatchers("/main").permitAll()
