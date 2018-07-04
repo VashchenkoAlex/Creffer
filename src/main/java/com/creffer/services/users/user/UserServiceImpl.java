@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-@Service("userServise")
+@Service/*("userServise")*/
 public class UserServiceImpl implements UserService {
     @Autowired
     private GetTokenServiceImpl getTokenService;

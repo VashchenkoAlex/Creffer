@@ -5,6 +5,7 @@ import com.creffer.security.TokenAuth;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,7 @@ import java.util.Date;
 @Service
 public class TokenAuthenticationManager implements AuthenticationManager{
     @Autowired
+    @Qualifier("userDetailsService")
     private UserDetailsService userDetailsService;
     /**
      * Attempts to authenticate the passed {@link Authentication} object, returning a

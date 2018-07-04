@@ -1,5 +1,6 @@
 package com.creffer.controllers.admin;
 
+import com.creffer.security.TokenAuth;
 import org.springframework.http.HttpRequest;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,9 +16,10 @@ import javax.servlet.http.HttpSession;
 public class DashBoardController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView dashGet(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.getAttribute("SPRING_SECURITY_CONTEXT");
         System.out.println("/adminDashboard");
-        return new ModelAndView("redirect:/pages/protected/admin/dashboard");
-        //return new ModelAndView("forward:/pages/protected/admin/dashboard.html");
+        return new ModelAndView("/protected/admin/dashboard");
     }
     @RequestMapping(method = RequestMethod.POST,produces = "text/html")
     public ModelAndView dashPost(){

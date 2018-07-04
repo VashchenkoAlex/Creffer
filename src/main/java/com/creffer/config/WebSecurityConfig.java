@@ -47,14 +47,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     CrefSuccessHandler crefSuccessHandler;
     @Autowired
     private AccessDeniedHandler deniedHandler;
-    @Autowired
+    /*@Autowired
     @Qualifier("userDetailsService")
-    private UserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;*/
 
-    @Autowired
+    /*@Autowired
     private TokenAuthenticationManager tokenAuthenticationManager;
     @Autowired
-    private AuthenticationProvider tokenAuthProvider;
+    private AuthenticationProvider tokenAuthProvider;*/
 
     @Autowired
     SecurityContextHolder securityContextHolder;
@@ -74,9 +74,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .disable()
                 .headers().frameOptions().sameOrigin()
                 .and()
-                .exceptionHandling().accessDeniedHandler(deniedHandler)
-                .and()
-                .addFilterAfter(restTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .exceptionHandling().accessDeniedHandler(deniedHandler);
+                /*.and()
+                .addFilterAfter(restTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);*/
         http.authorizeRequests()
             .antMatchers("/").permitAll()
             .antMatchers("/signup").permitAll()
@@ -91,23 +91,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/adminDashboard").hasRole("ADMIN")
                 //.antMatchers("/pages/protected/admin/**").hasRole("ADMIN")
         .antMatchers("/protected/**").authenticated().accessDecisionManager(decisionManager);
-        http.formLogin()
+        /*http.formLogin()
                 .loginPage("/login")
                 .successHandler(new CrefSuccessHandler())
-                .failureHandler(new CrefFailureHandler());
+                .failureHandler(new CrefFailureHandler());*/
     }
     @Bean
     public LogoutSuccessHandler logoutSuccessHandler(){
         return new CustomLogoutSuccessHandler();
     }
 
-    @Bean(name = "restTokenAuthenticationFilter")
+    /*@Bean(name = "restTokenAuthenticationFilter")
     public RestTokenAuthenticationFilter restTokenAuthenticationFilter() {
         RestTokenAuthenticationFilter restTokenAuthenticationFilter = new RestTokenAuthenticationFilter();
         tokenAuthenticationManager.setUserDetailsService(userDetailsService);
         restTokenAuthenticationFilter.setAuthenticationManager(tokenAuthenticationManager);
         return restTokenAuthenticationFilter;
-    }
+    }*/
 
     @Bean(name = "userDetailsService")
     public UserDetailsService getUserDetailsService(){
@@ -117,8 +117,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth//.parentAuthenticationManager(tokenAuthenticationManager)
-                .authenticationProvider(tokenAuthProvider)
-                .userDetailsService(userDetailsService)
+                //.authenticationProvider(tokenAuthProvider)
+                .userDetailsService(new UserDetailsServiceImpl()/*userDetailsService*/)
                 .passwordEncoder(bCryptPasswordEncoder);
     }
 
