@@ -11,7 +11,7 @@ public class AdvDashboardController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView pubDashboardGet(){
         System.out.println("/advertiserDashboard");
-        return new ModelAndView("/pages/protected/advertiser/dashboard");
+        return new ModelAndView("/protected/advertiser/dashboard");
     }
 
     @RequestMapping(method = RequestMethod.POST)

@@ -13,7 +13,7 @@ public class PubDashboardController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView pubDashboardGet(){
         System.out.println("/publisherDashboard");
-        return new ModelAndView("/pages/protected/publisher/dashboard");
+        return new ModelAndView("/protected/publisher/dashboard");
     }
 
     @RequestMapping(method = RequestMethod.POST)

@@ -12,7 +12,6 @@ public class ManagerDashBoardController {
     public ModelAndView dashGet(){
         System.out.println("/managerDashboard");
         return new ModelAndView("/protected/manager/dashboard");
-        //return new ModelAndView("forward:/pages/protected/admin/dashboard.html");
     }
     @RequestMapping(method = RequestMethod.POST,produces = "text/html")
     public ModelAndView dashPost(){
