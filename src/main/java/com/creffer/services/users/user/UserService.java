@@ -1,6 +1,5 @@
 package com.creffer.services.users.user;
 
-import com.creffer.models.LoginModel;
 import com.creffer.models.SuccessModel;
 import com.creffer.models.users.UserModel;
 

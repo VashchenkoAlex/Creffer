@@ -43,8 +43,8 @@ import java.util.List;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-    @Autowired
-    CrefSuccessHandler crefSuccessHandler;
+    //@Autowired
+    //CrefSuccessHandler crefSuccessHandler;
     @Autowired
     private AccessDeniedHandler deniedHandler;
     /*@Autowired
@@ -80,17 +80,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.authorizeRequests()
             .antMatchers("/").permitAll()
             .antMatchers("/signup").permitAll()
-            .antMatchers("/manager/dashboard").permitAll()
             .antMatchers("/login").permitAll()
             .antMatchers("/js/**").permitAll()
             .antMatchers("/main").permitAll()
             .antMatchers("/track").permitAll()
             .antMatchers("/doGame").permitAll()
-            .antMatchers("/managerDashboard").permitAll()
             .antMatchers("/pages/protected/manager/**").permitAll()
                 .antMatchers("/adminDashboard").hasRole("ADMIN")
-                //.antMatchers("/pages/protected/admin/**").hasRole("ADMIN")
-        .antMatchers("/protected/**").authenticated().accessDecisionManager(decisionManager);
+                .antMatchers("/pages/protected/admin/**").hasRole("ADMIN")
+                .antMatchers("/publisherDashboard").hasRole("PUBLISHER")
+                .antMatchers("/pages/protected/publisher/**").hasRole("PUBLISHER")
+            .antMatchers("/protected/**").authenticated().accessDecisionManager(decisionManager);
         /*http.formLogin()
                 .loginPage("/login")
                 .successHandler(new CrefSuccessHandler())

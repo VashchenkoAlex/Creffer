@@ -18,7 +18,6 @@ public class DashBoardController {
     public ModelAndView dashGet(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.getAttribute("SPRING_SECURITY_CONTEXT");
-        System.out.println("/adminDashboard");
         return new ModelAndView("/protected/admin/dashboard");
     }
     @RequestMapping(method = RequestMethod.POST,produces = "text/html")

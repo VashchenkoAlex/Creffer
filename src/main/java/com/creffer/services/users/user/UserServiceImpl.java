@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-@Service/*("userServise")*/
+@Service("userServise")
 public class UserServiceImpl implements UserService {
     @Autowired
     private GetTokenServiceImpl getTokenService;
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     public void savePublisher(UserModel user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
-        RoleModel pubRole = roleRepo.findByRole("PUBLISHER");
+        RoleModel pubRole = roleRepo.findByRole("ROLE_PUBLISHER");
         ArrayList<RoleModel> roles = new ArrayList<>();
         roles.add(pubRole);
         user.setRoles(roles);

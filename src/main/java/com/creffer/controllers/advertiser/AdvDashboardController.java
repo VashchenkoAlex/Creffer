@@ -1,19 +1,17 @@
-package com.creffer.controllers.publisher;
+package com.creffer.controllers.advertiser;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/publisherDashboard")
-public class PubDashboardController {
+@RequestMapping("/advertiserDashboard")
+public class AdvDashboardController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView pubDashboardGet(){
-        System.out.println("/publisherDashboard");
-        return new ModelAndView("/pages/protected/publisher/dashboard");
+        System.out.println("/advertiserDashboard");
+        return new ModelAndView("/pages/protected/advertiser/dashboard");
     }
 
     @RequestMapping(method = RequestMethod.POST)

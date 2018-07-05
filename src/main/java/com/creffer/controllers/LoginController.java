@@ -6,6 +6,8 @@ import com.creffer.services.security.UserDetailsServiceImpl;
 import com.creffer.services.users.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +42,10 @@ public class LoginController {
         if (successModel.isAccessed()) {
             response.setStatus(HttpServletResponse.SC_OK);
             try {
+                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
                 String role = successModel.getRoles().get(0).getRole();
                 if ("ROLE_ADMIN".equals(role)) {
+                    System.out.println("Admin passed");
                     mav.setViewName("redirect:/adminDashboard");
                 }
                 if ("ROLE_MANAGER".equals(role)) {
@@ -54,7 +58,7 @@ public class LoginController {
                 }
                 if ("ROLE_ADVERTISER".equals(role)) {
                     System.out.println(" Advertiser Passed");
-                    mav.setViewName("redirect:advertiserDashboard");
+                    mav.setViewName("redirect:/advertiserDashboard");
                 }
             } catch (Exception ex) {
                 System.out.println("Auth error");
