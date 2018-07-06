@@ -36,42 +36,46 @@ public class LoginController {
                               final HttpServletResponse response) {
         log.info("we're at /login.POST.email+password");
         ModelAndView mav = new ModelAndView();
-        SuccessModel successModel = userService.validateUser(email, password);
-        HttpSession session = request.getSession(true);
-        session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
-        if (successModel!=null&&successModel.isAccessed()) {
-            response.setStatus(HttpServletResponse.SC_OK);
-            try {
+        try {
+            SuccessModel successModel = userService.validateUser(email, password);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+            if (successModel != null && successModel.isAccessed()) {
+                response.setStatus(HttpServletResponse.SC_OK);
                 String role = successModel.getRoles().get(0).getRole();
-                if ("ROLE_ADMIN".equals(role)) {
-                    log.info("Admin success");
-                    mav.setViewName("redirect:/adminDashboard");
+                switch (role){
+                    case "ROLE_ADMIN":{
+                        log.info("Admin success");
+                        mav.setViewName("redirect:/adminDashboard");
+                        break;
+                    }
+                    case "ROLE_MANAGER":{
+                        log.info("Manager success");
+                        mav.setViewName("redirect:/managerDashboard");
+                        break;
+                    }
+                    case "ROLE_PUBLISHER":{
+                        log.info("Publisher success");
+                        mav.setViewName("redirect:/publisherDashboard");
+                        break;
+                    }
+                    case "ROLE_ADVERTISER":{
+                        log.info("Advertiser success");
+                        mav.setViewName("redirect:/advertiserDashboard");
+                    }
                 }
-                if ("ROLE_MANAGER".equals(role)) {
-                    log.info("Manager success");
-                    mav.setViewName("redirect:/managerDashboard");
-                }
-                if ("ROLE_PUBLISHER".equals(role)) {
-                    log.info("Publisher success");
-                    mav.setViewName("redirect:/publisherDashboard");
-                }
-                if ("ROLE_ADVERTISER".equals(role)) {
-                    log.info("Advertiser success");
-                    mav.setViewName("redirect:/advertiserDashboard");
-                }
-            } catch (Exception ex) {
-                log.info("Authentication error");
-                mav.addObject("messge","Authentication_error");
-                mav.addObject("error",true);
+            }else {
+                log.info("Login Error");
+                mav.addObject("error", true);
+                mav.addObject("message", "Success_error");
                 mav.setViewName("redirect:/login");
             }
-        } else {
-            log.info("Login Error");
-            mav.addObject("error",true);
-            mav.addObject("message","Success_error");
+        }catch (Exception ex) {
+            log.info("Authentication error");
+            mav.addObject("messge", "Authentication_error");
+            mav.addObject("error", true);
             mav.setViewName("redirect:/login");
         }
-
         return mav;
     }
 

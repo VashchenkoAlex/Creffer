@@ -6,9 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository("userRepository")
-public interface UserRepo extends JpaRepository<UserModel, Long>
-        //,JpaSpecificationExecutor<UserModel>
-    {
+public interface UserRepo extends JpaRepository<UserModel, Long>{
     UserModel save(UserModel user);
     void deleteByEmail(UserModel user);
     //void updateByEmail(UserModel user);

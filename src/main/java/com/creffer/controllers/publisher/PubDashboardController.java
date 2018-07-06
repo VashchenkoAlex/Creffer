@@ -1,23 +1,23 @@
 package com.creffer.controllers.publisher;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/publisherDashboard")
 public class PubDashboardController {
-    @RequestMapping(method = RequestMethod.GET)
+    private static final Logger log = LoggerFactory.getLogger(PubDashboardController.class);
+    @GetMapping(value = "/publisherDashboard")
     public ModelAndView pubDashboardGet(){
-        System.out.println("/publisherDashboard");
+        log.info("/publisherDashboard");
         return new ModelAndView("/protected/publisher/dashboard");
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping(value = "/publisherDashboard")
     public ModelAndView pubDashboardPost(){
-        return new ModelAndView("forward:/pages/protected/publisher/dashboard");
+        return new ModelAndView("redirect:/pages/protected/publisher/dashboard");
     }
 }

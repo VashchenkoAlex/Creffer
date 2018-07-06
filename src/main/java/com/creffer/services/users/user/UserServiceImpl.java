@@ -7,6 +7,9 @@ import com.creffer.repository.users.UserRepo;
 import com.creffer.repository.users.RoleRepo;
 import com.creffer.security.TokenAuth;
 import com.creffer.services.security.GetTokenServiceImpl;
+import org.hibernate.JDBCException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 
 @Service("userServise")
 public class UserServiceImpl implements UserService {
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired
     private GetTokenServiceImpl getTokenService;
     @Autowired
@@ -56,7 +60,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public SuccessModel validateUser(String email, String password) {
+    public SuccessModel validateUser(String email, String password) throws Exception {
         String token = "";
         SuccessModel success = new SuccessModel();
         UserModel user = userRepo.findByEmail(email);
@@ -64,12 +68,7 @@ public class UserServiceImpl implements UserService {
             return null;
         }else {
             String correctPassword = user.getPassword();
-
-            try {
-                token = getTokenService.getToken(email,password);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            token = getTokenService.getToken(email,password);
             boolean checkPass = bCryptPasswordEncoder.matches(password,correctPassword);
             TokenAuth tokenAuth = new TokenAuth(token,user.getRoles(),checkPass,user,correctPassword);
             SecurityContextHolder.getContext().setAuthentication(tokenAuth);

@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository("tokenRepository")
 public interface TokenRepo extends JpaRepository<TokenModel,Long>{
     TokenModel save(TokenModel token);
-    TokenModel findByEmail(String email);
+    TokenModel findByUserId(long id);
+    //TokenModel update(TokenModel token);
 }

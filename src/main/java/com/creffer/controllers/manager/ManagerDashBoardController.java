@@ -1,24 +1,33 @@
 package com.creffer.controllers.manager;
 
+import com.creffer.controllers.LoginController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 @Controller
-@RequestMapping(value = "/managerDashboard")
 public class ManagerDashBoardController {
-    @RequestMapping(method = RequestMethod.GET)
+    private static final Logger log = LoggerFactory.getLogger(ManagerDashBoardController.class);
+    @GetMapping(value = "/managerDashboard")
     public ModelAndView dashGet(){
-        System.out.println("/managerDashboard");
+        log.info("/managerDashboard");
         return new ModelAndView("/protected/manager/dashboard");
     }
-    @RequestMapping(method = RequestMethod.POST,produces = "text/html")
-    public ModelAndView dashPost(){
-        /*HttpSession session = request.getSession(true);
+    @PostMapping(value = "/managerDashboard")
+    public ModelAndView dashPost(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession(true);
         session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
         response.setStatus(HttpServletResponse.SC_OK);
-        return "redirect:/pages/protected/admin/dashboard.html";*/
-        return new ModelAndView("forward:/pages/protected/manager/dashboard.html");
+        return new ModelAndView("forward:/protected/manager/dashboard");
     }
 }

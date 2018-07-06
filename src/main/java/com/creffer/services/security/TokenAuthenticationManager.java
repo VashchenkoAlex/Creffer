@@ -1,6 +1,7 @@
 package com.creffer.services.security;
 
 import com.creffer.models.users.UserModel;
+import com.creffer.repository.system.TokenRepo;
 import com.creffer.security.TokenAuth;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.impl.DefaultClaims;
@@ -20,6 +21,7 @@ import java.util.Date;
 
 @Service
 public class TokenAuthenticationManager implements AuthenticationManager{
+    private static final String TOKEN_KEY = "creffer2018";
     @Autowired
     @Qualifier("userDetailsService")
     private UserDetailsService userDetailsService;
@@ -77,10 +79,9 @@ public class TokenAuthenticationManager implements AuthenticationManager{
 
     private TokenAuth processAuth(TokenAuth auth) throws AuthenticationException{
         String token = auth.getToken();
-        String key = "creffer2018";
         DefaultClaims claims;
         try{
-            claims = (DefaultClaims) Jwts.parser().setSigningKey(key).parse(token).getBody();
+            claims = (DefaultClaims) Jwts.parser().setSigningKey(TOKEN_KEY).parse(token).getBody();
         }catch (Exception ex){
             throw new AuthenticationServiceException("Token corrupted");
         }
@@ -94,8 +95,4 @@ public class TokenAuthenticationManager implements AuthenticationManager{
             throw new AuthenticationServiceException("Token expired date error");
         }
     }
-
-    /*public void setUserDetailsService(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }*/
 }

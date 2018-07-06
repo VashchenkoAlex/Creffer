@@ -1,29 +1,25 @@
 package com.creffer.services.security;
 
-import com.creffer.models.LoginModel;
-import com.creffer.models.system.TokenModel;
 import com.creffer.models.users.RoleModel;
 import com.creffer.models.users.UserModel;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.userdetails.User;
 
 import java.util.*;
 
 @Service
 public class GetTokenServiceImpl implements GetTokenService {
+    private static final String TOKEN_KEY = "creffer2018";
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
     @Override
     public String getToken(String email, String password) throws Exception {
-        //String ip = loginModel.getIp();
         if (email==null||password==null){
             return null;
         }
@@ -36,7 +32,6 @@ public class GetTokenServiceImpl implements GetTokenService {
         if (bCryptPasswordEncoder.matches(password,thePassword)){
 
             tokenData.put("clientType", role);
-            //tokenData.put("userIP", ip);
             tokenData.put("username", email);
             long createDate = new Date().getTime();
             tokenData.put("token_create_date", createDate);
@@ -49,8 +44,7 @@ public class GetTokenServiceImpl implements GetTokenService {
             jwtBuilder.setExpiration(calendar.getTime());
             jwtBuilder.setClaims(tokenData);
             //  JWT key
-            String key = "creffer2018";
-            return jwtBuilder.signWith(SignatureAlgorithm.HS512, key).compact();
+            return jwtBuilder.signWith(SignatureAlgorithm.HS512, TOKEN_KEY).compact();
         }else {
             throw new Exception("Authentication error");
         }

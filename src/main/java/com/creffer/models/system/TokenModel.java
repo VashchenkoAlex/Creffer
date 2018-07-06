@@ -6,32 +6,33 @@ import java.util.Objects;
 @Entity
 @Table(name = "tokens")
 public class TokenModel {
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "token_id")
-    private long countId;
-
-    @Column(name = "user_email")
-    private String email;
+    private long countId;*/
+    @Id
+    @Column(name = "user_id")
+    @JoinTable(name = "users", joinColumns = @JoinColumn(name = "user_id"))
+    private int userId;
 
     @Column(name = "token")
     private String token;
 
-    public TokenModel(String token, String email) {
+    public TokenModel(String token, int userId) {
         this.token = token;
-        this.email = email;
+        this.userId = userId;
     }
 
     public TokenModel() {
     }
 
-    public long getCountId() {
+    /*public long getCountId() {
         return countId;
     }
 
     public void setCountId(long countId) {
         this.countId = countId;
-    }
+    }*/
 
     public String getToken() {
         return token;
@@ -41,12 +42,12 @@ public class TokenModel {
         this.token = token;
     }
 
-    public String getEmail() {
-        return email;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -54,14 +55,14 @@ public class TokenModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TokenModel that = (TokenModel) o;
-        return countId == that.countId &&
-                Objects.equals(email, that.email) &&
+        return //countId == that.countId &&
+                userId == that.userId &&
                 Objects.equals(token, that.token);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(countId, email, token);
+        return Objects.hash(/*countId,*/ userId, token);
     }
 }

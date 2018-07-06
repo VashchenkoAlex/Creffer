@@ -1,27 +1,30 @@
 package com.creffer.security;
 
+import com.creffer.models.system.TokenModel;
 import com.creffer.models.users.RoleModel;
 import com.creffer.models.users.UserModel;
+import com.creffer.repository.system.TokenRepo;
 import com.creffer.services.security.GetTokenServiceImpl;
 import com.creffer.services.users.user.UserServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class TokenAuthProvider implements AuthenticationProvider{
+    private static final Logger log = LoggerFactory.getLogger(TokenAuthProvider.class);
     @Autowired
     UserServiceImpl userService;
     @Autowired
     GetTokenServiceImpl getTokenService;
+    @Autowired
+    TokenRepo tokenRepo;
     /**
      * Performs authentication with the same contract as
      * {@link AuthenticationManager#authenticate(Authentication)}
@@ -37,7 +40,7 @@ public class TokenAuthProvider implements AuthenticationProvider{
      */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        System.out.println("authenticate() TokenAuthProvider");
+        log.info("authenticate");
         String email = authentication.getName();
         Object credentials = authentication.getCredentials();
         if (credentials!=null) {
@@ -47,7 +50,9 @@ public class TokenAuthProvider implements AuthenticationProvider{
                 final List<RoleModel> grantedAuths = user.getRoles();
                 Authentication authent = null;
                 try {
-                    authent = new TokenAuth(getTokenService.getToken(email, pass), grantedAuths, true, user, pass);
+                    String token = getTokenService.getToken(email, pass);
+                    tokenRepo.save(new TokenModel(token,user.getId()));
+                    authent = new TokenAuth(token, grantedAuths, true, user, pass);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

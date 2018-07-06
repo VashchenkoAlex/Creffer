@@ -1,8 +1,6 @@
 package com.creffer.models.users;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,8 +19,6 @@ public class UserModel implements Serializable,UserDetails,CredentialsContainer 
     private int id;
 
     @Column(name = "email")
-    @Email
-    @NotEmpty
     @JsonView(UI.class)
     private String email;
 

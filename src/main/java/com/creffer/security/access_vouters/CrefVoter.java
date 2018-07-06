@@ -1,5 +1,7 @@
 package com.creffer.security.access_vouters;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.ConfigAttribute;
@@ -9,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 public class CrefVoter implements AccessDecisionVoter{
+    private static final Logger log = LoggerFactory.getLogger(CrefVoter.class);
     /**
      * Indicates whether this {@code AccessDecisionVoter} is able to vote on the passed
      * {@code ConfigAttribute}.
@@ -57,13 +60,13 @@ public class CrefVoter implements AccessDecisionVoter{
      */
     @Override
     public int vote(Authentication authentication, Object object, Collection collection) {
-        System.out.println("vote() - CrefVoter.class");
+        log.info("vote() - CrefVoter.class");
         int result = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .filter("ADMIN"::equals)
                 .findAny()
                 .map(s-> ACCESS_DENIED).orElseGet(()->ACCESS_ABSTAIN);
-        System.out.println("Result = "+result);
+        log.info("Result = "+result);
         return result;
     }
 

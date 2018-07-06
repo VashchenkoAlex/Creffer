@@ -9,5 +9,5 @@ public interface UserService {
     void saveManager(UserModel user);
     void saveAdmin(UserModel user);
     void saveAdvertiser(UserModel user);
-    SuccessModel validateUser(String email, String password);
+    SuccessModel validateUser(String email, String password) throws Exception;
 }
