@@ -60,15 +60,15 @@ public class LoginController {
                 }
             } catch (Exception ex) {
                 System.out.println("Auth error");
-                mav.addObject("messge","Authentication error");
+                mav.addObject("messge","Authentication_error");
                 mav.addObject("error",true);
-                mav.setViewName("forward:/login");
+                mav.setViewName("redirect:/login");
             }
         } else {
             System.out.println("Login Error");
             mav.addObject("error",true);
-            //mav.addObject("message","Success error");
-            mav.setViewName("redirect:/login?error=true&message=Success error");
+            mav.addObject("message","Success_error");
+            mav.setViewName("redirect:/login");
         }
 
         return mav;
@@ -78,7 +78,7 @@ public class LoginController {
     @ResponseBody
     public ModelAndView login(@RequestParam("error") boolean error,
                               @RequestParam("message") String message){
-        System.out.println("we're at parametrized /login.GET.error+message");
+        System.out.println("we're at parametrized /login.GET.error"+message);
         ModelAndView mav = new ModelAndView();
         mav.addObject("message",message);
         mav.addObject("error",error);
