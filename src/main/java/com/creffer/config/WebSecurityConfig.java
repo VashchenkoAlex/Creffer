@@ -1,17 +1,12 @@
 package com.creffer.config;
 
 import com.creffer.security.CustomLogoutSuccessHandler;
-import com.creffer.security.RestTokenAuthenticationFilter;
 import com.creffer.security.access_handlers.CrefDeniedHandler;
-import com.creffer.security.access_handlers.CrefFailureHandler;
-import com.creffer.security.access_handlers.CrefSuccessHandler;
 import com.creffer.security.access_vouters.CrefVoter;
 import com.creffer.services.security.UserDetailsServiceImpl;
-import com.creffer.services.security.TokenAuthenticationManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.*;
 import org.springframework.security.access.AccessDecisionManager;
@@ -19,7 +14,6 @@ import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,7 +24,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.sql.DataSource;
@@ -122,14 +115,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .passwordEncoder(bCryptPasswordEncoder);
     }
 
-    @ConfigurationProperties(prefix = "datasource.primary")
     @Bean
     @Primary
-    public DataSource dataSource(){
-        return DataSourceBuilder
-                .create()
-                .build();
+    @ConfigurationProperties(prefix = "datasource.primary")
+    public DataSourceProperties firstDataSourceProperties(){
+        return new DataSourceProperties();
     }
+
+    @Bean
+    @Primary
+    @ConfigurationProperties(prefix = "datasource.primary")
+    public DataSource dataSource(){
+        return firstDataSourceProperties().initializeDataSourceBuilder().build();
+    }
+
     @Bean
     public SecurityContextHolder securityContextHolder(){
         return new SecurityContextHolder();

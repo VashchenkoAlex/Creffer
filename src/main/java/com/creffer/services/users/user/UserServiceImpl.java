@@ -58,19 +58,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public SuccessModel validateUser(String email, String password) {
         String token = "";
-        UserModel user = userRepo.findByEmail(email);
-        String correctPassword = user.getPassword();
         SuccessModel success = new SuccessModel();
-        try {
-           token = getTokenService.getToken(email,password);
-        } catch (Exception e) {
-            e.printStackTrace();
+        UserModel user = userRepo.findByEmail(email);
+        if (user==null){
+            return null;
+        }else {
+            String correctPassword = user.getPassword();
+
+            try {
+                token = getTokenService.getToken(email,password);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            boolean checkPass = bCryptPasswordEncoder.matches(password,correctPassword);
+            TokenAuth tokenAuth = new TokenAuth(token,user.getRoles(),checkPass,user,correctPassword);
+            SecurityContextHolder.getContext().setAuthentication(tokenAuth);
+            success.setRoles(user.getRoles());
+            success.setAccessed(checkPass&&user.getActive()==1);
+            return success;
+
         }
-        boolean checkPass = bCryptPasswordEncoder.matches(password,correctPassword);
-        TokenAuth tokenAuth = new TokenAuth(token,user.getRoles(),checkPass,user,correctPassword);
-        SecurityContextHolder.getContext().setAuthentication(tokenAuth);
-        success.setRoles(user.getRoles());
-        success.setAccessed(checkPass&&user.getActive()==1);
-        return success;
     }
 }
