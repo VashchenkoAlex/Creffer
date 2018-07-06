@@ -21,7 +21,6 @@ public class TokenAuth implements Authentication,Serializable,Principal,Credenti
     private String credentials;
 
     public TokenAuth(String token, HttpServletRequest request) {
-        System.out.println("set token at TokenAuth constructor1");
         this.token = token;
         this.details = request;
     }
@@ -31,7 +30,6 @@ public class TokenAuth implements Authentication,Serializable,Principal,Credenti
                      boolean isAuthenticated,
                      UserDetails principal,
                      String credentials) {
-        System.out.println("set token at TokenAuth constructor2");
         this.token = token;
         this.authorities = authorities;
         this.isAuthenticated = isAuthenticated;
@@ -142,13 +140,11 @@ public class TokenAuth implements Authentication,Serializable,Principal,Credenti
      */
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-        System.out.println("Set Auth-d");
         this.isAuthenticated = isAuthenticated;
     }
 
     @Override
     public String getName() {
-        System.out.println("getName() -  TokenAuth.class");
         if (principal!=null){
             return principal.getUsername();
         }
@@ -161,7 +157,6 @@ public class TokenAuth implements Authentication,Serializable,Principal,Credenti
     }
 
     public String getToken() {
-        System.out.println("getToken() TokenAuth.class");
         return token;
     }
 

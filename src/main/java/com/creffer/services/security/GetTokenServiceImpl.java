@@ -50,8 +50,7 @@ public class GetTokenServiceImpl implements GetTokenService {
             jwtBuilder.setClaims(tokenData);
             //  JWT key
             String key = "creffer2018";
-            String token = jwtBuilder.signWith(SignatureAlgorithm.HS512, key).compact();
-            return token;
+            return jwtBuilder.signWith(SignatureAlgorithm.HS512, key).compact();
         }else {
             throw new Exception("Authentication error");
         }

@@ -26,6 +26,6 @@ public class DashBoardController {
         session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
         response.setStatus(HttpServletResponse.SC_OK);
         return "redirect:/pages/protected/admin/dashboard.html";*/
-        return new ModelAndView("forward:/pages/protected/admin/dashboard.html");
+        return new ModelAndView("forward:/pages/protected/admin/dashboard");
     }
 }
