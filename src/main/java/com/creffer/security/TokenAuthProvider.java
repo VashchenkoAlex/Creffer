@@ -1,11 +1,11 @@
 package com.creffer.security;
 
 import com.creffer.models.system.TokenModel;
-import com.creffer.models.users.RoleModel;
+import com.creffer.models.system.RoleModel;
 import com.creffer.models.users.UserModel;
 import com.creffer.repository.system.TokenRepo;
 import com.creffer.services.security.GetTokenServiceImpl;
-import com.creffer.services.users.user.UserServiceImpl;
+import com.creffer.services.user.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

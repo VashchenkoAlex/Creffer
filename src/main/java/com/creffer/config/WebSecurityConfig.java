@@ -3,7 +3,7 @@ package com.creffer.config;
 import com.creffer.security.CustomLogoutSuccessHandler;
 import com.creffer.security.access_handlers.CrefDeniedHandler;
 import com.creffer.security.access_vouters.CrefVoter;
-import com.creffer.services.security.UserDetailsServiceImpl;
+import com.creffer.services.user.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;

@@ -1,6 +1,6 @@
-package com.creffer.services.security;
+package com.creffer.services.user;
 
-import com.creffer.services.users.user.UserService;
+import com.creffer.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

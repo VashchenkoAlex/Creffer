@@ -1,67 +1,68 @@
 package com.creffer.models.system;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "clicks")
 public class ClickModel {
     @Column(name = "click_count_id")
     @Id
-    @GenericGenerator(name = "uuid_gen", strategy = "uuid2")
-    @GeneratedValue(generator = "uuid_gen")
-    private UUID countId;
-    @Column
-    private String transactionId;
-    @Column
-    private int offerId;
-    @Column
-    private int pubId;
-    @Column
-    private String subPubId;
-    @Column
-    private String clickIp;
-    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long countId;//done
+    @Column(name = "aff_sub")
+    private String transactionId;//done
+    @Column(name = "offer_id")
+    private int offerId;//done
+    @Column(name = "pub_id")
+    private int pubId;//done
+    @Column(name = "aff_sub2")
+    private String subPubId;//done
+    @Column(name = "click_ip")
+    private String clickIp;//done
+    @Column(name = "click_country")
     private String clickCountry;
-    @Column
+    @Column(name = "device_brand")
     private String deviceBrand;
-    @Column
+    @Column(name = "device_model")
     private String deviceModel;
-    @Column
+    @Column(name = "device_os")
     private String deviceOs;
-    @Column
+    @Column(name = "device_os_version")
     private String deviceOsVersion;
-    @Column
+    @Column(name = "device_id")
     private String deviceId;
-    @Column
+    @Column(name = "mac_address")
     private String macAddress;
-    @Column
+    @Column(name = "device_platform")
     private String devicePlatform;
-    @Column
+    @Column(name = "idfa")
     private String idfaGaid;
-    @Column
-    private Date clickDate;
-    @Column
-    private int advId;
-    @Column
+    @Column(name = "click_date")
+    private LocalDateTime clickDate;
+    @Column(name = "page_lang")
     private String pageLanguage;
-    @Column
+    @Column(name = "forwarded")
     private String clickForwarded;
-    @Column
+    @Column(name = "referer")
     private String referer;
-    @Column
-    private String userAgent;
-    @Column
+    @Column(name = "user_agent")
+    private String userAgent;//done
+    @Column(name = "via_proxy")
     private String viaProxy;
 
     public ClickModel() {
     }
 
-    public ClickModel(String transactionId, int offerId, int pubId, String subPubId, String clickIp, String clickCountry, String deviceBrand, String deviceModel, String deviceOs, String deviceOsVersion, String deviceId, String macAddress, String devicePlatform, String idfaGaid, Date clickDate, int advId, String pageLanguage, String clickForwarded, String referer, String userAgent, String viaProxy) {
+    public ClickModel(String transactionId, int offerId, int pubId, String subPubId) {
+        this.transactionId = transactionId;
+        this.offerId = offerId;
+        this.pubId = pubId;
+        this.subPubId = subPubId;
+    }
+
+    public ClickModel(String transactionId, int offerId, int pubId, String subPubId, String clickIp, String clickCountry, String deviceBrand, String deviceModel, String deviceOs, String deviceOsVersion, String deviceId, String macAddress, String devicePlatform, String idfaGaid, LocalDateTime clickDate, String pageLanguage, String clickForwarded, String referer, String userAgent, String viaProxy) {
         this.transactionId = transactionId;
         this.offerId = offerId;
         this.pubId = pubId;
@@ -77,7 +78,6 @@ public class ClickModel {
         this.devicePlatform = devicePlatform;
         this.idfaGaid = idfaGaid;
         this.clickDate = clickDate;
-        this.advId = advId;
         this.pageLanguage = pageLanguage;
         this.clickForwarded = clickForwarded;
         this.referer = referer;
@@ -87,11 +87,11 @@ public class ClickModel {
 
     //Getters and setters
 
-    public UUID getCountId() {
+    public long getCountId() {
         return countId;
     }
 
-    public void setCountId(UUID countId) {
+    public void setCountId(long countId) {
         this.countId = countId;
     }
 
@@ -199,20 +199,12 @@ public class ClickModel {
         this.idfaGaid = idfaGaid;
     }
 
-    public Date getClickDate() {
+    public LocalDateTime getClickDate() {
         return clickDate;
     }
 
-    public void setClickDate(Date clickDate) {
+    public void setClickDate(LocalDateTime clickDate) {
         this.clickDate = clickDate;
-    }
-
-    public int getAdvId() {
-        return advId;
-    }
-
-    public void setAdvId(int advId) {
-        this.advId = advId;
     }
 
     public String getPageLanguage() {
@@ -272,7 +264,6 @@ public class ClickModel {
         ClickModel that = (ClickModel) o;
         return offerId == that.offerId &&
                 pubId == that.pubId &&
-                advId == that.advId &&
                 Objects.equals(countId, that.countId) &&
                 Objects.equals(transactionId, that.transactionId) &&
                 Objects.equals(subPubId, that.subPubId) &&
@@ -296,7 +287,6 @@ public class ClickModel {
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(countId, transactionId, offerId, pubId, subPubId, clickIp, clickCountry, deviceBrand, deviceModel, deviceOs, deviceOsVersion, deviceId, macAddress, devicePlatform, idfaGaid, clickDate, advId, pageLanguage, clickForwarded, referer, userAgent, viaProxy);
+        return Objects.hash(countId, transactionId, offerId, pubId, subPubId, clickIp, clickCountry, deviceBrand, deviceModel, deviceOs, deviceOsVersion, deviceId, macAddress, devicePlatform, idfaGaid, clickDate, pageLanguage, clickForwarded, referer, userAgent, viaProxy);
     }
 }

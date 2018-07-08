@@ -1,13 +1,12 @@
-package com.creffer.services.users.user;
+package com.creffer.services.user;
 
-import com.creffer.models.SuccessModel;
+import com.creffer.models.system.SuccessModel;
 import com.creffer.models.users.UserModel;
-import com.creffer.models.users.RoleModel;
+import com.creffer.models.system.RoleModel;
 import com.creffer.repository.users.UserRepo;
 import com.creffer.repository.users.RoleRepo;
 import com.creffer.security.TokenAuth;
 import com.creffer.services.security.GetTokenServiceImpl;
-import org.hibernate.JDBCException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,23 +44,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveManager(UserModel user) {
-        //TO DO
-    }
-
-    @Override
-    public void saveAdmin(UserModel user) {
-        //TO DO
-    }
-
-    @Override
-    public void saveAdvertiser(UserModel user) {
-        //TO DO
-    }
-
-    @Override
     public SuccessModel validateUser(String email, String password) throws Exception {
-        String token = "";
+        String token;
         SuccessModel success = new SuccessModel();
         UserModel user = userRepo.findByEmail(email);
         if (user==null){

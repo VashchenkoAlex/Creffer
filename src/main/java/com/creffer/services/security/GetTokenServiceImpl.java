@@ -1,7 +1,8 @@
 package com.creffer.services.security;
 
-import com.creffer.models.users.RoleModel;
+import com.creffer.models.system.RoleModel;
 import com.creffer.models.users.UserModel;
+import com.creffer.services.user.UserDetailsServiceImpl;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

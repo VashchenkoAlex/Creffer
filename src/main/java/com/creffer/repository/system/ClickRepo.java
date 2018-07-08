@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClickRepo extends JpaRepository<ClickModel,String> {
+    @Override
+    ClickModel save(ClickModel click);
+    //ClickModel findBy
 }

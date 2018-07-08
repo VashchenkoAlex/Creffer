@@ -1,10 +1,16 @@
-package com.creffer.utils;
+package com.creffer.services.utils;
+import com.google.common.net.HttpHeaders;
+
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+@Service("httpHeadersSorter")
 public class HTTPHeadersSorter {
     private static final String[] IP_HEADER_CANDIDATES = {
             "X-Forwarded-For",
@@ -23,12 +29,6 @@ public class HTTPHeadersSorter {
 
     private HttpServletRequest request;
 
-    public HTTPHeadersSorter(HttpServletRequest request) {
-        this.request = request;
-        getHeadersInfo();
-        printMap();
-    }
-
     public String getClientIpAddress(){
         for (String header: IP_HEADER_CANDIDATES) {
             String ip = request.getHeader(header);
@@ -42,6 +42,10 @@ public class HTTPHeadersSorter {
         return headersMap.get("user-agent");
     }
 
+    public String getAcceptLanguage(){
+        return headersMap.get("accept-language");
+    }
+
     private void getHeadersInfo(){
         headersMap = new HashMap<>();
         Enumeration headersNames = request.getHeaderNames();
@@ -51,10 +55,19 @@ public class HTTPHeadersSorter {
             headersMap.put(key,value);
         }
     }
-    private void printMap(){
-        for (Map.Entry<String,String> pair:headersMap.entrySet()) {
-            System.out.println(pair.getKey()+" : "+pair.getValue());
-            System.out.println();
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+        getHeadersInfo();
+    }
+    public String getReferer(){
+        String referer = request.getHeader(HttpHeaders.REFERER);
+        if (referer==null){
+            referer = "Direct";
         }
+        return referer;
+    }
+    public LocalDateTime getClickDate(){
+        return LocalDateTime.now();
     }
 }

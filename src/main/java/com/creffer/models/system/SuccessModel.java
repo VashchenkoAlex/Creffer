@@ -1,6 +1,6 @@
-package com.creffer.models;
+package com.creffer.models.system;
 
-import com.creffer.models.users.RoleModel;
+import com.creffer.models.system.RoleModel;
 
 import java.util.List;
 

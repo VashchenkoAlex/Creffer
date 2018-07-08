@@ -1,4 +1,4 @@
-package com.creffer.models.users;
+package com.creffer.models.system;
 
 import org.springframework.security.core.GrantedAuthority;
 

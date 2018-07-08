@@ -1,5 +1,6 @@
 package com.creffer.config;
 
+import com.creffer.services.utils.HTTPHeadersSorter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +39,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfi
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer){

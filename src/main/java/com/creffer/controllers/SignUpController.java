@@ -1,7 +1,7 @@
 package com.creffer.controllers;
 
 import com.creffer.models.users.UserModel;
-import com.creffer.services.users.user.UserService;
+import com.creffer.services.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

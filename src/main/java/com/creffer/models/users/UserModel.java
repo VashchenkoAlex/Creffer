@@ -1,5 +1,6 @@
 package com.creffer.models.users;
 
+import com.creffer.models.system.RoleModel;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
