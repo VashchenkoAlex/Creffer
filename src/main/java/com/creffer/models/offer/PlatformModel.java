@@ -1,8 +1,16 @@
 package com.creffer.models.offer;
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Table(name = "platforms")
 public class PlatformModel {
     @Column(name = "platform_id")

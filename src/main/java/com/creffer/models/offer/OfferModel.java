@@ -5,13 +5,20 @@ import com.creffer.models.offer.enums.OfferStatus;
 import com.creffer.models.offer.enums.OfferType;
 import com.creffer.models.offer.enums.TrafficType;
 import com.creffer.models.users.UserModel;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Table(name = "offers")
 public class OfferModel {
     @Column(name = "offer_id")
@@ -19,14 +26,14 @@ public class OfferModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int offerId;
 
-    @Column(name = "adv_id")
-    private int adv_id;
+    @Column(name = "advId")
+    private int advId;
 
     @Column(name = "adv_offer_id")
     private int advOfferId;
 
     @Column(name = "redirect_offer_id")
-    private int redirectOfferId;
+        private int redirectOfferId;
 
     @Column(name = "suspended")
     private boolean suspended;
@@ -34,13 +41,15 @@ public class OfferModel {
     @Column(name = "anti_fraud")
     private boolean antiFraud;
 
-    @Column(name = "sensitive")
+    @Column(name = "sensit")
     private boolean sensitive;
 
     @Column(name = "activate_date")
     private LocalDateTime activateDate;
 
-    @Column(name = "skip_affiliates")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "skip_affiliates",joinColumns = @JoinColumn(name = "offer_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<UserModel> skipAffiliates;
 
     @Column(name = "skip_percent")
@@ -109,5 +118,4 @@ public class OfferModel {
     @JoinTable(name = "offer_restrictions",joinColumns = @JoinColumn(name = "offer_id"),
             inverseJoinColumns = @JoinColumn(name = "restr_id"))
     private List<TrafficRestrictionModel> restrictions;
-
 }

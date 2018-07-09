@@ -5,6 +5,31 @@
     <title>Title</title>
 </head>
 <body>
+<h1>Add Offer</h1>
+<div class="wrapper">
+    <h1>Add New Offer</h1>
+    <form class="form" method="post">
+        <h3 class="sub-title">Information</h3>
+        <div class="inp">
+            <input type="text" id="advId" name="advId" placeholder="Advertiser Id" required="required">
+        </div>
+        <div class="inp">
+            <input type="text" id="advOfferId" name="advOfferId" placeholder="Advertiser Offer Id" required="required">
+        </div>
+        <div class="inp">
+            <input type="text" id="redirectOfferId" name="redirectOfferId" placeholder="Redirect Offer Id" required="required">
+        </div>
+        <label>Suspended</label>
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-sm btn-white">
+                <input type="radio" id="suspended" name="suspended" value="1">ON
+            </label>
+            <label class="btn btn-sm btn-white btn-active-gray active">
+                <input type="radio" id="suspended_at" name="suspended" value="0" checked="checked">OFF
+            </label>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

@@ -1,9 +1,17 @@
 package com.creffer.models.offer;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Table(name = "goals")
 public class GoalModel {
     @Column(name = "goal_id")

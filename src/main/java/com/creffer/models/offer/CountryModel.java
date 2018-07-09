@@ -1,8 +1,16 @@
 package com.creffer.models.offer;
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Table(name = "countries")
 public class CountryModel {
     @Column(name = "country_id")
@@ -18,4 +26,5 @@ public class CountryModel {
 
     @Column(name = "tree_lit_country")
     private String treeLitCountry;
+
 }
