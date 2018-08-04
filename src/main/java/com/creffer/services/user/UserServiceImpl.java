@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service("userServise")
 public class UserServiceImpl implements UserService {
@@ -43,6 +44,8 @@ public class UserServiceImpl implements UserService {
         userRepo.save(user);
     }
 
+
+
     @Override
     public SuccessModel validateUser(String email, String password) throws Exception {
         String token;
@@ -62,4 +65,5 @@ public class UserServiceImpl implements UserService {
 
         }
     }
+
 }

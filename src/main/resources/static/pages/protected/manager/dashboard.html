@@ -1,13 +1,494 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="import" href="/header">
 </head>
-<body>
-<h1>Manager Dashboard</h1>
-<form>
+<body class="skin-3">
+
+<h1 style="display:none">Manager Dashboard</h1>
+<form style="display:none">
     <input type="button" value="Add Offer" onClick='location.href="/offers/createOffer"'>
 </form>
+<div id="wrapper">
+    <div class="load_widget">
+
+    </div>
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+
+
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header" style="padding-left: 30px">
+
+                    <h2 style="margin-top: 16px">
+                        <a class="navbar-minimalize btn btn-primary m-r-sm hidden-lg hidden-md hidden-sm" href="/">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <i class="fa fa-th-large"></i>  Dashboard</h2>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <a style="font-weight: normal;" class="hidden-xs">waschenko@appave.mobi</a>
+                    </li>
+                    <li>
+                        <a href="http://appave.mobi/logout">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="row border-bottom white-bg dashboard-header">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h2>Profit</h2>
+                <hr>
+            </div>
+            <div class="row m-t-sm">
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-info font-thin font-big">$ 448.65</span>
+                    <div class="text-muted">
+                        <small>Today</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-primary font-thin font-big">$ 1,313.62</span>
+                    <div class="text-muted">
+                        <small>Yesterday</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-default font-thin font-big">$ 6,207.08</span>
+                    <div class="text-muted">
+                        <small>Last 7 days</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-warning font-thin font-big">$ 17,497.23</span>
+                    <div class="text-muted">
+                        <small>This month</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-success font-thin font-big">$ 46,928.04</span>
+                    <div class="text-muted">
+                        <small>Last month</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-danger font-big font-thin">$ 1,038,838.26</span>
+                    <div class="text-muted">
+                        <small>All time</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h2>Superlink Profit</h2>
+                <hr>
+            </div>
+            <div class="row m-t-sm">
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-info font-thin font-big">$ 9.05</span>
+                    <div class="text-muted">
+                        <small>Today</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-primary font-thin font-big">$ 57.78</span>
+                    <div class="text-muted">
+                        <small>Yesterday</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-default font-thin font-big">$ 425.19</span>
+                    <div class="text-muted">
+                        <small>Last 7 days</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-warning font-thin font-big">$ 1,118.25</span>
+                    <div class="text-muted">
+                        <small>This month</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-success font-thin font-big">$ 7,334.89</span>
+                    <div class="text-muted">
+                        <small>Last month</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-danger font-big font-thin">$ 245,303.35</span>
+                    <div class="text-muted">
+                        <small>All time</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h2>Revenues</h2>
+                <hr>
+            </div>
+            <div class="row m-t-sm">
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-info font-thin font-big">$ 1,110.45</span>
+                    <div class="text-muted">
+                        <small>Today</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-primary font-thin font-big">$ 2,983.12</span>
+                    <div class="text-muted">
+                        <small>Yesterday</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-default font-thin font-big">$ 13,622.38</span>
+                    <div class="text-muted">
+                        <small>Last 7 days</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-warning font-thin font-big">$ 37,531.92</span>
+                    <div class="text-muted">
+                        <small>This month</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-success font-thin font-big">$ 100,709.25</span>
+                    <div class="text-muted">
+                        <small>Last month</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-danger font-big font-thin">$ 2,900,295.07</span>
+                    <div class="text-muted">
+                        <small>All time</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h2>Offers</h2>
+                <hr>
+            </div>
+            <div class="row m-t-sm m-b-lg">
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-info font-thin font-big">9,624</span>
+                    <div class="text-muted">
+                        <small>Active</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-primary font-thin font-big">1,761</span>
+                    <div class="text-muted">
+                        <small>Private</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-default font-thin font-big">1,046</span>
+                    <div class="text-muted">
+                        <small>Suspended</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-warning font-thin font-big">412                    /9,219</span>
+                    <div class="text-muted">
+                        <small>Incent/Non incent</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-success font-thin font-big">2,391,601</span>
+                    <div class="text-muted">
+                        <small>Total</small>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 font-thin font-big text-center m-b-sm">
+                    <span class="label label-danger font-big font-thin">4,258</span>
+                    <div class="text-muted">
+                        <small>Offers per day</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="ibox float-e-margins ui-draggable ui-droppable" style="position: relative;">
+                        <div class="ibox-title">
+                            <h5>
+                                <i class="fa fa-info-circle text-info"></i>
+                                Smart statistics
+                            </h5>
+
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content table-responsive" style="display: block">
+                            <table class="table table-condensed table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th class="text-right">Clicks</th>
+                                    <th class="text-right">Back</th>
+                                    <th class="text-right">Convs</th>
+                                    <th class="text-right">Total</th>
+                                    <th class="text-right">Profit</th>
+                                    <th class="text-right">New offers</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Jun 14</td>
+                                    <td class="text-right">16,030,364</td>
+                                    <td class="text-right">1,030,838</td>
+                                    <td class="text-right">2,628</td>
+                                    <td class="text-right">$2,983.12</td>
+                                    <td class="text-right">$1,313.62</td>
+                                    <td class="text-right">5,190</td>
+                                </tr>
+                                <tr>
+                                    <td>Jun 13</td>
+                                    <td class="text-right">6,312,067</td>
+                                    <td class="text-right">1,057,739</td>
+                                    <td class="text-right">1,752</td>
+                                    <td class="text-right">$1,840.48</td>
+                                    <td class="text-right">$815.51</td>
+                                    <td class="text-right">5,054</td>
+                                </tr>
+                                <tr>
+                                    <td>Jun 12</td>
+                                    <td class="text-right">5,943,319</td>
+                                    <td class="text-right">1,381,158</td>
+                                    <td class="text-right">1,758</td>
+                                    <td class="text-right">$2,231.07</td>
+                                    <td class="text-right">$962.92</td>
+                                    <td class="text-right">5,022</td>
+                                </tr>
+                                <tr>
+                                    <td>Jun 11</td>
+                                    <td class="text-right">9,003,325</td>
+                                    <td class="text-right">807,232</td>
+                                    <td class="text-right">1,278</td>
+                                    <td class="text-right">$1,900.86</td>
+                                    <td class="text-right">$914.08</td>
+                                    <td class="text-right">3,344</td>
+                                </tr>
+                                <tr>
+                                    <td>Jun 10</td>
+                                    <td class="text-right">4,747,896</td>
+                                    <td class="text-right">715,353</td>
+                                    <td class="text-right">1,558</td>
+                                    <td class="text-right">$2,211.14</td>
+                                    <td class="text-right">$1,002.34</td>
+                                    <td class="text-right">2,405</td>
+                                </tr>
+                                <tr>
+                                    <td>Jun 09</td>
+                                    <td class="text-right">5,801,878</td>
+                                    <td class="text-right">812,499</td>
+                                    <td class="text-right">1,591</td>
+                                    <td class="text-right">$2,453.30</td>
+                                    <td class="text-right">$1,197.70</td>
+                                    <td class="text-right">2,102</td>
+                                </tr>
+                                <tr>
+                                    <td>Jun 08</td>
+                                    <td class="text-right">6,233,551</td>
+                                    <td class="text-right">741,104</td>
+                                    <td class="text-right">2,395</td>
+                                    <td class="text-right">$2,938.97</td>
+                                    <td class="text-right">$1,497.05</td>
+                                    <td class="text-right">2,074</td>
+                                </tr>
+                                <tr>
+                                    <td>Jun 07</td>
+                                    <td class="text-right">9,337,217</td>
+                                    <td class="text-right">405,188</td>
+                                    <td class="text-right">1,795</td>
+                                    <td class="text-right">$2,351.06</td>
+                                    <td class="text-right">$1,094.81</td>
+                                    <td class="text-right">6,346</td>
+                                </tr>
+                                <tr>
+                                    <td>Jun 06</td>
+                                    <td class="text-right">12,015,835</td>
+                                    <td class="text-right">427,449</td>
+                                    <td class="text-right">2,069</td>
+                                    <td class="text-right">$2,764.43</td>
+                                    <td class="text-right">$1,243.50</td>
+                                    <td class="text-right">3,955</td>
+                                </tr>
+                                <tr>
+                                    <td>Jun 05</td>
+                                    <td class="text-right">10,267,665</td>
+                                    <td class="text-right">446,469</td>
+                                    <td class="text-right">2,665</td>
+                                    <td class="text-right">$2,947.98</td>
+                                    <td class="text-right">$1,398.48</td>
+                                    <td class="text-right">5,391</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="text-center" id="ajax-loading" style="height: 40px; position: fixed; left: 0; top: 7px; z-index: 1000000; padding: 0; opacity: 0.7; display: none">
+            <span style="background-color: #0D2236; padding: 10px; font-size: 16px; color:#fff">
+                <img src="/../imgs/maneger/spinner2.svg" style="width: 24px; height: 24px">
+                Loading...
+            </span>
+        </div>
+    </div>
+</div>
+
+<script>
+    //$(document).ready(function () {
+        $('.load_widget').load('/widget')
+  //  })
+</script>
+<!-- Mainly scripts -->
+<script type="text/javascript" src="/../js/maneger/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/js.cookie.js"></script>
+<script type="text/javascript" src="/../js/maneger/bootstrap.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.metisMenu.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/inputmask.js"></script>
+<!-- Flot -->
+<script type="text/javascript" src="/../js/maneger/jquery.flot.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.flot.tooltip.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.flot.spline.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.flot.resize.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.flot.pie.js"></script>
+
+<!-- Peity -->
+<script type="text/javascript" src="/../js/maneger/jquery.peity.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script type="text/javascript" src="/../js/maneger/inspinia.js"></script>
+
+
+<!-- GITTER -->
+<script type="text/javascript" src="/../js/maneger/jquery.gritter.min.js"></script>
+
+<!-- Sparkline -->
+<script type="text/javascript" src="/../js/maneger/jquery.sparkline.min.js"></script>
+
+<!-- ChartNewJS-->
+<script type="text/javascript" src="/../js/maneger/ChartNew.js"></script>
+
+<!-- Chosen -->
+<script type="text/javascript" src="/../js/maneger/chosen.jquery.js"></script>
+<script type="text/javascript" src="/../js/maneger/ajax-chosen.js"></script>
+
+<!-- NoUiSlider -->
+<script type="text/javascript" src="/../js/maneger/jquery.nouislider.all.min.js"></script>
+
+<!-- Data Tables -->
+<script type="text/javascript" src="/../js/maneger/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.dataTables.columnFilter.js"></script>
+<script type="text/javascript" src="/../js/maneger/dataTables.bootstrap.js"></script>
+
+<!-- Template -->
+<script type="text/javascript" src="/../js/maneger/template.js"></script>
+<script>
+    var config = {
+        '.chosen-select': {},
+        '.chosen-select-deselect': {allow_single_deselect: true},
+        '.chosen-select-no-single': {disable_search_threshold: 10},
+        '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+        '.chosen-select-width': {width: "100%", disable_search_threshold: 10, search_contains: true},
+        '.chosen-select-width-single': {width: "100%", max_selected_options: 1, search_contains: true}
+    };
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+    $(".chosen-ajax").each(function () {
+        $(this).ajaxChosen({
+            type: 'GET',
+            url: $(this).data("ajax"),
+            dataType: 'json',
+            minTermLength: 3
+        }, function (data) {
+            var results = [];
+            $.each(data, function (i, val) {
+                results.push({value: val.id, text: val.name});
+            });
+            return results;
+        }, {
+            width: "100%",
+            disable_search_threshold: 10
+        });
+    });
+</script>
+
+<!-- iCheck -->
+<script type="text/javascript" src="/../js/maneger/icheck.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/autosize.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $('textarea').autoResize();
+
+        $(document).ajaxStart(function () {
+            $("#ajax-loading").fadeIn(100);
+        });
+        $(document).ajaxStop(function () {
+            $("#ajax-loading").stop().fadeOut(100);
+        });
+    });
+</script>
+
+
+<!-- Jasny -->
+<script type="text/javascript" src="/../js/maneger/jasny-bootstrap.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/moment.js"></script>
+<script type="text/javascript" src="/../js/maneger/moment-timezone.js"></script>
+<script type="text/javascript" src="/../js/maneger/daterangepicker.js"></script>
+<script type="text/javascript" src="/../js/maneger/bootstrap-datepicker.js"></script>
+
+<!-- Jvectormap -->
+<script type="text/javascript" src="/../js/maneger/jquery-jvectormap-2.0.0.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery-jvectormap-world-mill-en.js"></script>
+
+<script type="text/javascript" src="/../js/maneger/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/admin.js"></script>
+<script type="text/javascript" src="/../js/maneger/widgets.js"></script>
+<script type="text/javascript" src="/../js/maneger/multi-input.js"></script>
+<script>
+    $("table.fixed-header").stickyTableHeaders();
+</script>
+<script>
+    $(document).ready(function () {
+        //$('.load_widget').load('/managerDashboard/users');
+    })
+    </script>
+<!-- scripts -->
+<script>
+    window.serverTime = new Date("Jun 15 2018 6:28:40");
+</script>
+<script type="text/javascript" src="/../js/maneger/common.js"></script>
 </body>
 </html>

@@ -1,0 +1,193 @@
+.profile-element {
+    color: #fff;
+}
+
+.sidebar-collapse input {
+    color: #fff;
+}
+
+.sidebar-collapse input::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #ddd !important;
+}
+.sidebar-collapse input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #ddd !important;
+    opacity:  1;
+}
+.sidebar-collapse input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #ddd !important;
+    opacity:  1;
+}
+.sidebar-collapse input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #eee !important;
+}
+
+input::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #eee !important;
+}
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #eee !important;
+    opacity:  1;
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #eee !important;
+    opacity:  1;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #eee !important;
+}
+
+.skin-3 .img-circle {
+    border-radius: 50%;
+}
+
+.skin-3 .nav > li.active {
+    background-color: transparent !important;
+
+}
+
+.skin-3 .nav > li.active a {
+    color: #555555 !important;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    cursor: text !important;
+}
+
+.chosen-container-single .chosen-single {
+    padding: 4px 10px;
+}
+
+.chosen-container-single .chosen-single div {
+    top: 5px;
+}
+
+.chosen-container-single .chosen-search input[type="text"] {
+    border-color: #e7e7e7;
+}
+
+.btn.btn-white.active, .btn.btn-white.btn-active-green.active {
+    background-color: #DFFEDF;
+}
+
+.btn.btn-white.btn-active-red.active {
+    background-color: #FFE7ED;
+}
+
+.btn.btn-white.btn-active-yellow.active {
+    background-color: #FFF2C1;
+}
+
+.btn.btn-white.btn-active-blue.active {
+    background-color: #E0F5FF;
+}
+
+.btn.btn-white.btn-active-purple.active {
+    background-color: #E4E0FF;
+}
+
+.btn.btn-white.btn-active-gray.active {
+    background-color: #F5F5F5;
+}
+
+
+.input-group-addon {
+    background-color: #eee;
+}
+
+
+.skin-3 .navbar-default .nav:not(.nav-second-level) > li.active {
+    background: #38283C !important;
+    border-left: 4px solid #E79E47 !important;
+}
+
+.skin-3 .navbar-default .nav > li > a {
+    color: #948b96 !important;
+}
+
+.skin-3 .navbar-default .nav > li.active > a {
+    color: #fff !important;
+}
+
+.skin-3 .navbar-default .nav > li:hover > a {
+    color: #fff !important;
+}
+
+
+
+
+.tristate-switch {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.tristate-switch span:first-child {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 0;
+    font-size: 14px;
+    margin-right: 5px;
+    width: 20px;
+    display: inline-block;
+}
+
+.tristate-switch i {
+    padding: 0;
+    margin: 0;
+}
+
+.tristate-switch:hover span:first-child {
+    border: 1px solid #888;
+}
+.tristate-switch:hover span:last-child {
+    text-decoration: underline;
+}
+
+.tristate-switch.tristate-checked i {
+    color: seagreen;
+}
+.tristate-switch.tristate-unchecked i {
+    color: red;
+}
+.tristate-switch.tristate-tristate i {
+    color: orange;
+}
+
+b, strong, label, th {
+    font-weight: 600;
+}
+
+.chosen-container-single .chosen-single {
+    line-height: 20px !important;
+}
+.text_filter {
+    width: 100% !important;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 3px;
+}
+.container-m {
+    margin: 10px 3px;
+}
+#paidModal .modal-dialog
+{
+    width: 70%;
+}
+
+.partial {
+    margin: 20px 0;
+}
+
+.btn-radio .btn > input[type="radio"] {
+    position: absolute;
+    z-index: -1;
+    filter: alpha(opacity=0);
+    opacity: 0;
+}

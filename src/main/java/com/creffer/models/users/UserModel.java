@@ -113,6 +113,26 @@ public class UserModel implements Serializable,UserDetails,CredentialsContainer 
         password = null;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    public void setRoles(ArrayList<RoleModel> roles) {
+        this.roles = roles;
+    }
+
+    public List<RoleModel> getRoles() {
+        return roles;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
     //Accesses Markers
     public interface EXPORT{}
     public interface UI{}
