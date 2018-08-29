@@ -133,6 +133,14 @@ public class UserModel implements Serializable,UserDetails,CredentialsContainer 
         return active;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     //Accesses Markers
     public interface EXPORT{}
     public interface UI{}

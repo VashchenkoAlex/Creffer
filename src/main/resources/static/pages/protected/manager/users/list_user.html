@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="import" href="/header">
+</head>
+<body>
+
+<div id="wrapper">
+
+    <div class="load_widget"> </div>
+    <div id="page-wrapper" class="gray-bg dashbard-1"></div>
+</div>
+<script>
+    //$(document).ready(function () {
+    $('.load_widget').load('/widget')
+    //      })
+</script>
+<!-- Mainly scripts -->
+<script type="text/javascript" src="/../js/maneger/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/js.cookie.js"></script>
+<script type="text/javascript" src="/../js/maneger/bootstrap.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.metisMenu.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/inputmask.js"></script>
+<!-- Flot -->
+<script type="text/javascript" src="/../js/maneger/jquery.flot.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.flot.tooltip.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.flot.spline.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.flot.resize.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.flot.pie.js"></script>
+
+<!-- Peity -->
+<script type="text/javascript" src="/../js/maneger/jquery.peity.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script type="text/javascript" src="/../js/maneger/inspinia.js"></script>
+
+
+<!-- GITTER -->
+<script type="text/javascript" src="/../js/maneger/jquery.gritter.min.js"></script>
+
+<!-- Sparkline -->
+<script type="text/javascript" src="/../js/maneger/jquery.sparkline.min.js"></script>
+
+<!-- ChartNewJS-->
+<script type="text/javascript" src="/../js/maneger/ChartNew.js"></script>
+
+<!-- Chosen -->
+<script type="text/javascript" src="/../js/maneger/chosen.jquery.js"></script>
+<script type="text/javascript" src="/../js/maneger/ajax-chosen.js"></script>
+
+<!-- NoUiSlider -->
+<script type="text/javascript" src="/../js/maneger/jquery.nouislider.all.min.js"></script>
+
+<!-- Data Tables -->
+<script type="text/javascript" src="/../js/maneger/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery.dataTables.columnFilter.js"></script>
+<script type="text/javascript" src="/../js/maneger/dataTables.bootstrap.js"></script>
+
+<!-- Template -->
+<script type="text/javascript" src="/../js/maneger/template.js"></script>
+<script>
+    var config = {
+        '.chosen-select': {},
+        '.chosen-select-deselect': {allow_single_deselect: true},
+        '.chosen-select-no-single': {disable_search_threshold: 10},
+        '.chosen-select-no-results': {no_results_text: 'Oops, nothing found!'},
+        '.chosen-select-width': {width: "100%", disable_search_threshold: 10, search_contains: true},
+        '.chosen-select-width-single': {width: "100%", max_selected_options: 1, search_contains: true}
+    };
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+    $(".chosen-ajax").each(function () {
+        $(this).ajaxChosen({
+            type: 'GET',
+            url: $(this).data("ajax"),
+            dataType: 'json',
+            minTermLength: 3
+        }, function (data) {
+            var results = [];
+            $.each(data, function (i, val) {
+                results.push({value: val.id, text: val.name});
+            });
+            return results;
+        }, {
+            width: "100%",
+            disable_search_threshold: 10
+        });
+    });
+</script>
+
+<!-- iCheck -->
+<script type="text/javascript" src="/../js/maneger/icheck.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/autosize.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green'
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $('textarea').autoResize();
+
+        $(document).ajaxStart(function () {
+            $("#ajax-loading").fadeIn(100);
+        });
+        $(document).ajaxStop(function () {
+            $("#ajax-loading").stop().fadeOut(100);
+        });
+    });
+</script>
+
+
+<!-- Jasny -->
+<script type="text/javascript" src="/../js/maneger/jasny-bootstrap.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/moment.js"></script>
+<script type="text/javascript" src="/../js/maneger/moment-timezone.js"></script>
+<script type="text/javascript" src="/../js/maneger/daterangepicker.js"></script>
+<script type="text/javascript" src="/../js/maneger/bootstrap-datepicker.js"></script>
+
+<!-- Jvectormap -->
+<script type="text/javascript" src="/../js/maneger/jquery-jvectormap-2.0.0.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/jquery-jvectormap-world-mill-en.js"></script>
+
+<script type="text/javascript" src="/../js/maneger/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="/../js/maneger/admin.js"></script>
+<script type="text/javascript" src="/../js/maneger/widgets.js"></script>
+<script type="text/javascript" src="/../js/maneger/multi-input.js"></script>
+<script>
+    $("table.fixed-header").stickyTableHeaders();
+</script>
+
+<!-- scripts -->
+<script>
+    window.serverTime = new Date("Jun 15 2018 6:38:37");
+</script>
+<script type="text/javascript" src="/../js/maneger/common.js"></script>
+
+<!-- WYSIWYG editor -->
+<script type="text/javascript" src="/../js/maneger/summernote.min.js"></script>
+
+
+
+
+
+<div class="scrollbar-measure"></div></body><style type="text/css" id="stylebot-css">a.additional_filter {color: #000000 !important;}a.btn.btn-sm.btn-white {color: #000000 !important;}a.btn.btn-success.m-l-xs {background-color: #635463 !important;color: #ffffff !important;}a.chosen-single {background-color: #c2c2c2 !important;}a.chosen-single span {background-color: #c7c7c7 !important;}a.sort-column {background-color: #999399 !important;border-color: 999399 !important;color: #ffffff !important;}button.btn.btn-success {background-color: #9c439c !important;color: #ffffff !important;}button.btn.btn-success.m-l-xs {background-color: #524452 !important;}button.btn.btn-white {background-color: #e0d9e0 !important;color: #000000 !important;}button.decline-btn.btn.btn-danger {background-color: #574a57 !important;color: #ffffff !important;}div.comment {background-color: #c7c7c7 !important;color: #000000 !important;}div.gray-bg.dashbard-1 {background-color: #999399 !important;}div.ibox-content {background-color: #999399 !important;}div.ibox-title.blue {background-color: #999399 !important;}div.m-b-md {background-color: #c4c4c4 !important;}div.modal-body {background-color: #949494 !important;}div.modal-footer {background-color: #a3a3a3 !important;}div.modal-header {background-color: #bababa !important;}div.panel-body {background-color: #c4c4c4 !important;}div.table-responsive {background-color: #999399 !important;border-color: 999399 !important;color: #ffffff !important;}div.text-muted small a {color: #ffffff !important;}h4.modal-title {background-color: #bababa !important;}nav.navbar.navbar-static-top {background-color: #b8b8b8 !important;}span.text-warning.m-r-sm {color: #131407 !important;font-size: 20px !important;font-weight: bold !important;}tbody tr td {background-color: #999399 !important;}tbody tr th {background-color: #dbdbdb !important;}td div a {color: #ffffff !important;}thead tr th {background-color: #cfcfcf !important;}thead.tableFloatingHeaderOriginal tr th {background-color: #999399 !important;border-color: #ffffff !important;color: #ffffff !important;}tr td div {color: #ffffff !important;}ul.chosen-choices {background-color: #e0e0e0 !important;color: #ffffff !important;}ul.dropdown-menu.pull-right li a {background-color: #a1a1a1 !important;}ul.dropdown-menu.size-selector li a {background-color: #c2bec2 !important;}</style></body>
+</html>

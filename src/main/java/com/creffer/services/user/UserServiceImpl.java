@@ -14,8 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service("userServise")
 public class UserServiceImpl implements UserService {
@@ -33,6 +32,15 @@ public class UserServiceImpl implements UserService {
         return userRepo.findByEmail(email);
     }
 
+
+    @Override
+    public List<UserModel> userlist() {
+        List<UserModel> userModels = userRepo.userList();
+        if( userModels != null &&!userModels.isEmpty()){
+            return userModels;
+        }
+        return Collections.EMPTY_LIST;
+    }
     @Override
     public void savePublisher(UserModel user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -65,5 +73,8 @@ public class UserServiceImpl implements UserService {
 
         }
     }
+
+
+
 
 }

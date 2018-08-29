@@ -1,8 +1,10 @@
 package com.creffer.controllers;
 
-import com.creffer.models.users.UserModel;
 import com.creffer.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Станислав on 21.07.2018.
@@ -20,7 +25,7 @@ import java.io.IOException;
 public class WidgetController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping(value = "/widget")
     public ModelAndView dashGet(){
@@ -46,9 +51,18 @@ public class WidgetController {
 
     }
     @RequestMapping(value = "/widget/find", method = RequestMethod.POST)
-    public @ResponseBody   UserModel find() {
+    public @ResponseBody
+    Map<String, Object> find() {
 
+        Map<String, Object> map= new HashMap<>();
 
-        return userService.findUserByEmail("Staspropisnov@yandex.ru");
+        map.put("contactList", userService.findUserByEmail("Staspropisnov@yandex.ru"));
+
+        return map;
+    }
+
+ @RequestMapping(value = "/widget/userlist", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List> userlist() {
+        return new ResponseEntity<List>(userService.userlist(), HttpStatus.OK);
     }
 }

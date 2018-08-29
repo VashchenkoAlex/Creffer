@@ -21,14 +21,14 @@ public class ManagerController {
     @GetMapping(value = "/manager")
     public ModelAndView dashGet(){
        // log.info("/manager");
-        return new ModelAndView("/protected/manager/users/manager");
+        return new ModelAndView("/protected/manager/users/list_user");
     }
     @PostMapping(value = "/manager")
     public ModelAndView dashPost(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession(true);
         session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
         response.setStatus(HttpServletResponse.SC_OK);
-        return new ModelAndView("forward:/protected/manager/users/manager");
+        return new ModelAndView("forward:/protected/manager/users/list_user");
     }
 
 }
