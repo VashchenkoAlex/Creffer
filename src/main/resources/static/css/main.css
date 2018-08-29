@@ -32,3 +32,9 @@
     font-weight: 700;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.9);
 }
+.blocks
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr minmax(300px, 300px);
+    text-align: center;
+}

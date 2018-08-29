@@ -42,10 +42,17 @@ public class UserServiceImpl implements UserService {
         return Collections.EMPTY_LIST;
     }
 
+
+//    @Override
+//    public int remove_user(int id) {
+//        return userRepo.remove_user(id);
+//    }
+
     @Override
     public int remove_user(int id) {
         return userRepo.deleteById(id);
     }
+
 
     @Override
     public void savePublisher(UserModel user) {
