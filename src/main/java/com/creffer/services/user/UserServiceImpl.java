@@ -35,17 +35,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserModel> userlist() {
-        List<UserModel> userModels = userRepo.userList();
+        List<UserModel> userModels = userRepo.findAll();
         if( userModels != null &&!userModels.isEmpty()){
             return userModels;
         }
         return Collections.EMPTY_LIST;
     }
 
+
 //    @Override
 //    public int remove_user(int id) {
 //        return userRepo.remove_user(id);
 //    }
+
+    @Override
+    public int remove_user(int id) {
+        return userRepo.deleteById(id);
+    }
+
 
     @Override
     public void savePublisher(UserModel user) {
