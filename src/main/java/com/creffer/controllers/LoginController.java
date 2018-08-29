@@ -44,22 +44,22 @@ public class LoginController {
                 response.setStatus(HttpServletResponse.SC_OK);
                 String role = successModel.getRoles().get(0).getRole();
                 switch (role){
-                    case "ROLE_ADMIN":{
+                    case "ADMIN":{
                         log.info("Admin success");
                         mav.setViewName("redirect:/adminDashboard");
                         break;
                     }
-                    case "ROLE_MANAGER":{
+                    case "MANAGER":{
                         log.info("Manager success");
                         mav.setViewName("redirect:/managerDashboard");
                         break;
                     }
-                    case "ROLE_PUBLISHER":{
+                    case "PUBLISHER":{
                         log.info("Publisher success");
                         mav.setViewName("redirect:/publisherDashboard");
                         break;
                     }
-                    case "ROLE_ADVERTISER":{
+                    case "ADVERTISER":{
                         log.info("Advertiser success");
                         mav.setViewName("redirect:/advertiserDashboard");
                     }
