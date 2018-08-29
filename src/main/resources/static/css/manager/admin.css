@@ -191,3 +191,30 @@ b, strong, label, th {
     filter: alpha(opacity=0);
     opacity: 0;
 }
+.list_users
+{
+    list-style: none;
+    color:#fff;
+}
+.users_list
+{
+    margin-top: 20px;
+}
+.block_users
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr minmax(300px, 300px);
+    text-align: center;
+    font-size: 16px;
+}
+.action_user input[type="button"] {
+    padding: 10px;
+    color: #000;
+    background: antiquewhite;
+    border: none;
+    margin: 5px;
+}
+.action_user input[type="button"]:first-child {
+    background: red;
+    color: #fff;
+}

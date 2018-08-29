@@ -8,13 +8,89 @@
 <div id="wrapper">
 
     <div class="load_widget"> </div>
-    <div id="page-wrapper" class="gray-bg dashbard-1"></div>
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header" style="padding-left: 30px">
+
+                    <h2 style="margin-top: 16px">
+                        <a class="navbar-minimalize btn btn-primary m-r-sm hidden-lg hidden-md hidden-sm" href="/">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <i class="fa fa-th-large"></i>  User List</h2>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <a style="font-weight: normal;" class="hidden-xs">waschenko@appave.mobi</a>
+                    </li>
+                    <li>
+                        <a href="http://appave.mobi/logout">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="users_list">
+
+        </div>
+
+
+    </div>
 </div>
 <script>
     //$(document).ready(function () {
     $('.load_widget').load('/widget')
     //      })
 </script>
+
+
+<script>
+    $.ajax({
+        url: '/widget/userlist',
+        datatype: 'json',
+        type:'post',
+        contentType: 'application/json',
+        success: function(hxr) {
+
+            var object_length = Object.keys(hxr).length;
+            $('.old_user').text(object_length);
+            //console.log($.session);
+            var html='<ul class="list_users">';
+            for (var key in hxr) {
+                console.log(hxr[key])
+               html+='<li>';
+                html+='<hr>';
+
+                html+='<div class="block_users">';
+               html+='<div class="info_user">';
+               html+= hxr[key].firstName+' '+  hxr[key].lastName+'<br>';
+               html+= 'Email: '+hxr[key].email+' Phone:'+hxr[key].phone+' Skype:'+hxr[key].skype;
+               html+='</div>';
+                html+='<div class="dscript_user">';
+                html+= 'Country: '+hxr[key].country+ ' City: '+hxr[key].city+' Address: '+ hxr[key].address1+'<br>'+hxr[key].address2+'<br>';
+                html+= 'Company: '+hxr[key].company+' Company Url: '+ hxr[key].companyUrl;
+                html+='</div>';
+                html+='<div class="action_user">';
+                html+= '<input type="button" title="remove" value="remove">';
+                html+= '<input type="button" title="edit" value="edit">';
+                html+='</div>';
+                html+='</div>';
+
+                html+='<hr>';
+               html+='</li>';
+            }
+            html +='</ul>';
+            $('.users_list').html(html);
+        }
+    })
+    </script>
+
+
+
+
 <!-- Mainly scripts -->
 <script type="text/javascript" src="/../js/maneger/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/../js/maneger/js.cookie.js"></script>

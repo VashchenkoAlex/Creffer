@@ -71,7 +71,7 @@
 
             <li>
 
-                <a href="/#"><i class="fa fa-lg fa-fw fa-group"></i>
+                <a href="http://localhost:8080/#"><i class="fa fa-lg fa-fw fa-group"></i>
                     <span class="nav-label">Users</span>
                     <span style="margin-left: 5px;" class="fa arrow"></span>
                     <label class="old_user badge badge-info pull-right">0</label>
@@ -294,16 +294,6 @@
                // console.log("Success: " + hxr);
             }
         })
-  $.ajax({
-        url: '/widget/userlist',
-        datatype: 'json',
-        type:'post',
-        contentType: 'application/json',
-        success: function(hxr) {
 
-            var object_length = Object.keys(hxr).length;
-            $('.old_user').text(object_length);
-        }
-    })
     })
     </script>
