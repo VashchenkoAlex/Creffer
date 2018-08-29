@@ -74,7 +74,7 @@
                 html+= 'Company: '+hxr[key].company+' Company Url: '+ hxr[key].companyUrl;
                 html+='</div>';
                 html+='<div class="action_user">';
-                html+= '<input type="button" title="remove" value="remove">';
+                html+= '<input class="rem" data-id="'+hxr[key].id+'" type="button" title="remove" value="remove">';
                 html+= '<input type="button" title="edit" value="edit">';
                 html+='</div>';
                 html+='</div>';
@@ -85,6 +85,20 @@
             html +='</ul>';
             $('.users_list').html(html);
         }
+    })
+    $('.rem').on('click',function () {
+      var data =  $(this).data('id');
+        $.ajax({
+            url: '/widget/remove_user',
+            datatype: 'json',
+            type:'post',
+            data: data,
+            contentType: 'application/json',
+            success: function(hxr) {
+                // console.log("Success: " + hxr);
+            }
+        })
+
     })
     </script>
 

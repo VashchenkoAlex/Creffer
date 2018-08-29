@@ -16,6 +16,9 @@ public interface UserRepo extends JpaRepository<UserModel, Long>{
 
     @Query("select usermodel from  UserModel usermodel")
     List<UserModel> userList();
+
+    @Query("DELETE from  UserModel usermodel WHERE usermodel.id")
+    int remove_user(int id);
 //     Map<String,UserModel> findUsers();
     // UserModel userlist();
 }

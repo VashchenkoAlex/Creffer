@@ -8,12 +8,13 @@ import java.util.Map;
 
 public interface UserService {
     UserModel findUserByEmail(String email);
-    //  Map<String, UserModel> userlist(int active);
     List<UserModel> userlist();
+    int remove_user(int id);
 
     void savePublisher(UserModel user);
 
     SuccessModel validateUser(String email, String password) throws Exception;
+
 
 
 }
