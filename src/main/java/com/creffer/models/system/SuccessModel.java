@@ -6,6 +6,7 @@ import java.util.List;
 
 public class SuccessModel {
     private List<RoleModel> roles;
+    private String email;
     private boolean accessed;
 
     public SuccessModel() {
@@ -25,5 +26,13 @@ public class SuccessModel {
 
     public void setAccessed(boolean accessed) {
         this.accessed = accessed;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService {
             boolean checkPass = bCryptPasswordEncoder.matches(password,correctPassword);
             TokenAuth tokenAuth = new TokenAuth(token,user.getRoles(),checkPass,user,correctPassword);
             SecurityContextHolder.getContext().setAuthentication(tokenAuth);
+            success.setEmail(email);
             success.setRoles(user.getRoles());
             success.setAccessed(checkPass&&user.getActive()==1);
             return success;
