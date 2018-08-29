@@ -12,12 +12,15 @@
 
     <script src="/../js/signup.js" type="text/css"></script>
 </head>
-<body>
+<body class="main-page">
 <div id="mainNav" class="main-nav top">
     <div class="container">
-        <a href="/" class="logo">
-            <img src="/../imgs/login.jpg" alt="Creffer">
-        </a>
+
+        <div class="header_block">
+            <a href="#home" class="logo srcTo" data-srcto="#home">
+                <img src="/../imgs/maneger/logo.png" alt="Creffer | Mobile Traffic Tracking Platform">
+            </a></div>
+
         <span class="toggle-nav">
             <span class="icn-bar"></span>
             <span class="icn-bar"></span>
@@ -54,7 +57,8 @@
         <div class="container">
             <h1 class="page-title">Become a partner</h1>
             <form class="form" method="post">
-                <h3 class="sub-title">Account details</h3>
+                <div>  <h3 class="sub-title">Account details</h3>
+
                 <div class="inp">
                     <input type="text" id="company" name="company" placeholder="*Company/Name" required="required">
                 </div>
@@ -598,8 +602,8 @@
                 <div class="inp">
                     <input type="text" id="phone" name="phone" placeholder="*Phone*" required="required">
                 </div>
-                <br>
-
+               </div>
+<div>
                 <h3 class="sub-title">User details</h3>
                 <div class="inp">
                     <input type="email" id="email" name="email" placeholder="*Email*" required="required">
@@ -616,7 +620,7 @@
                 <div class="inp">
                     <input type="password" id="confirmPassword" name="confirmPassword" placeholder="*Confirm password*" required="required">
                 </div>
-                <br>
+</div><div>
 
                 <h3 class="sub-title">Additional questions</h3>
                 <div class="inp">
@@ -649,6 +653,7 @@
                     <p>Already have account?</p>
                     <a class="link" href="/login">Sign in</a>
                 </div>
+            </div>
             </form>
         </div>
     </div>

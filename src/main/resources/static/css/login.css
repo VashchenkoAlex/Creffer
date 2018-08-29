@@ -8,3 +8,64 @@
     font-size: 20px;
     color: #FF1C19;
 }
+.header_block {
+    background: #2f4050;
+    padding: 20px;
+}
+.header_block form {
+    float: right;
+}
+.header_block form input {
+     padding: 10px 20px;
+     background: #007bff;
+     border: none;
+     color: #fff;
+     cursor: pointer;
+ }
+.header_block form input:hover {
+
+    background: #007bff;
+    box-shadow: inset 1px 1px 1px rgba(0,0,0,0.9);
+}
+.form-signin h3
+{
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: underline;
+}
+.main-page .container
+{
+    width: 100%;
+    max-width: 100%;
+}
+.header_block img{
+    width: 14%;
+}
+.mainNavCont ul
+{
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr minmax(300px, 300px);
+    text-align: center;
+    padding-left: 0;
+    background: #2f4050;
+}
+.mainNavCont ul li
+{
+    background: #B2E1CA;
+    margin: 10px;
+    padding: 10px;
+}
+.mainNavCont ul li a
+{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.9);
+}
+.blocks
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr minmax(300px, 300px);
+    text-align: center;
+}

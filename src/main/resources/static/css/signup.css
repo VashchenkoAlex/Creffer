@@ -33,3 +33,57 @@ body{
     padding: 7px 15px;
     border-radius: 2px;
 }
+.header_block {
+    background: #2f4050;
+    padding: 20px;
+}
+.main-page .container
+{
+    width: 100%;
+    max-width: 100%;
+}
+.header_block img{
+    width: 14%;
+}
+.mainNavCont ul
+{
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr minmax(300px, 300px);
+    text-align: center;
+    padding-left: 0;
+    background: #2f4050;
+}
+.form
+{
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr  minmax(300px, 300px);
+    text-align: center;
+    padding-left: 0;
+    width: 100%;
+    min-width: 100%;
+}.form div:nth-child(2)
+{
+margin:0 30px;
+}
+
+.mainNavCont ul li
+{
+    background: #B2E1CA;
+    margin: 10px;
+    padding: 10px;
+}
+.mainNavCont ul li a
+{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.9);
+}
+.blocks
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr minmax(300px, 300px);
+    text-align: center;
+}

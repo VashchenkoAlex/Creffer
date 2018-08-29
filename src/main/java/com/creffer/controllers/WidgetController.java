@@ -65,9 +65,9 @@ public class WidgetController {
     public ResponseEntity<List> userlist() {
         return new ResponseEntity<List>(userService.userlist(), HttpStatus.OK);
     }
-    @RequestMapping(value = "/widget/remove_user", method = RequestMethod.POST)
-    public int remove_user(@RequestParam("data") int data) {
-
-        return userService.remove_user(data);
-    }
+//    @RequestMapping(value = "/widget/remove_user", method = RequestMethod.POST)
+//    public int remove_user(@RequestParam("data") int data) {
+//
+//        return userService.remove_user(data);
+//    }
 }

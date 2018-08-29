@@ -9,7 +9,7 @@ import java.util.Map;
 public interface UserService {
     UserModel findUserByEmail(String email);
     List<UserModel> userlist();
-    int remove_user(int id);
+//    int remove_user(int id);
 
     void savePublisher(UserModel user);
 
