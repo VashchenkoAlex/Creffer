@@ -1,6 +1,6 @@
 body{
     color: #4e555b;
-    background: white;
+    background-color: #595959;
 }
 .form {
     max-width: 520px;
@@ -29,7 +29,15 @@ body{
     resize: none;
     text-align: left;
     font: 16px/30px 'Arial',sans-serif;
-    color: #697f8f;
+    color: #bfe9ff;
     padding: 7px 15px;
     border-radius: 2px;
+}
+
+.a, .li{
+    color: white;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+    color: white;
 }

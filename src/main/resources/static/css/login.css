@@ -1,5 +1,8 @@
+#body {
+    background-color: #595959;
+}
 .container img{
-    width:200px;
+    width:600px;
     height:200px;
 }
 #errorData p
@@ -7,4 +10,8 @@
     display: none;
     font-size: 20px;
     color: #FF1C19;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+    color: white;
 }
