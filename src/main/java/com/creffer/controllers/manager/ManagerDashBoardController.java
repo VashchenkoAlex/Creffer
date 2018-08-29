@@ -2,7 +2,7 @@ package com.creffer.controllers.manager;
 
 import com.creffer.models.users.UserModel;
 import com.creffer.services.user.UserService;
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
